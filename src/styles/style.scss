@@ -1,0 +1,114 @@
+@import '@/styles/_variables.scss';
+
+.wrapper {
+    background-color: rgb(221, 221, 221);
+    min-height: 100vh;
+
+    &__container {
+        padding: 60px 0px;
+        min-height: calc(100vh - 60px);
+    }
+}
+
+[class*=container] {
+    max-width: 960px;
+    margin: 0px auto;
+}
+
+.block {
+    box-shadow: $box-shadow;
+    border-radius: 10px;
+    background-color: $block-background;
+}
+
+.link {
+    color: $purple-color;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.input {
+    border-bottom: 1px solid rgb(153, 153, 153);
+    padding: 5px;
+    width: 100%;
+
+    &:focus {
+        outline: 0;
+        border-bottom: 1px solid $purple-color;
+    }
+}
+
+.button {
+    background-color: $purple-color;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color: white;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $purple-color-hover;
+    }
+
+    &_outline {
+        background-color: inherit;
+        color: black;
+
+        &:hover,
+        &.active {
+            background-color: $hover-background;
+        }
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-error {
+    color: rgb(255, 43, 43);
+    font-size: 14px;
+}
+
+.icon-wrapper {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: rgb(135, 102, 211);
+    }
+
+    &_gray:hover {
+        background-color: $hover-background;
+    }
+}
+
+.icon {
+    cursor: pointer;
+
+    &.icon_gray {
+        color: $icon-color-gray;
+
+        &:hover {
+            color: rgb(78, 78, 78);
+        }
+    }
+}
+
+.avatar {
+    overflow: hidden;
+    
+    img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

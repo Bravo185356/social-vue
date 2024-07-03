@@ -1,0 +1,33 @@
+@import '@/styles/_variables.scss';
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+.message-list {
+    flex: 1 1 auto;
+    overflow: auto;
+}
+
+.title {
+    font-size: 18px;
+    padding: 15px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+}
+
+.message-form {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+
+    .input {
+        border: 1px solid rgb(194, 194, 194);
+        border-radius: 5px;
+
+        &:focus {
+            border: 1px solid $purple-color;
+        }
+    }
+}

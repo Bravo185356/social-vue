@@ -1,0 +1,57 @@
+@import '@/styles/_variables.scss';
+
+.header {
+    background-color: rgb(154, 129, 211);
+    color: white;
+    border-radius: 0;
+    padding: 0px 15px;
+}
+
+.logo {
+    flex: 1 1 auto;
+    font-size: 24px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    gap: 20px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.chat {
+    font-size: 18px;
+}
+
+.search,
+.requests {
+    font-size: 20px;
+}
+
+.requests-empty {
+    text-wrap: nowrap;
+    padding: 10px 15px;
+}
+
+.requests-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.settings__block {
+    display: flex;
+}

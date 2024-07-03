@@ -1,0 +1,43 @@
+@import '@/styles/_variables.scss';
+
+.dialog {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover,
+    &.selected {
+        background-color: $purple-color;
+        color: white;
+    }
+}
+
+.avatar {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.info {
+    flex: 1 1 auto;
+}
+
+.unread {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(218, 218, 218);
+    padding: 0px 10px;
+    height: 25px;
+    border-radius: 10px;
+    color: black;
+}
+
+.last-message {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 200px;
+}
