@@ -1,6 +1,11 @@
 <template>
   <section class="registration block">
-    <div class="title">Регистрация</div>
+    <div class="header">
+      <RouterLink to="/login" class="icon-wrapper">
+        <v-icon icon="mdi mdi-arrow-left" />
+      </RouterLink>
+      <div class="title">Регистрация</div>
+    </div>
     <form class="form">
       <InputBlock placeholder="Имя" :errors="v$.name.$errors" v-model="formData.name" />
       <InputBlock placeholder="Фамилия" :errors="v$.surname.$errors" v-model="formData.surname" />
