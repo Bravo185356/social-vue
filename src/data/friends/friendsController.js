@@ -47,28 +47,30 @@ export class FriendsController {
   }
   
   static getFilteredFriendList(query, userId) {
-    const keys = Object.keys(query);
-
     const friends = friendsData.filter((friend) => friend.whose == userId);
+    const result = [];
+    const queryEntries = Object.entries(query);
 
-    const result = friends.filter((user) => {
-      let queryNum = 0;
+    for (let i = 0; i < friends.length; i++) {
+      const friend = friends[i];
+      let proccessedQueryCount = 0;
 
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        if (key === 'status' && query[key] === 'all') {
-          queryNum = queryNum + 1;
-        } else if (user[key] === query[key] && key !== 'status') {
-          queryNum = queryNum + 1;
-        } else if (key === 'status' && query[key] === 'online' && user.status === 'online') {
-          queryNum = queryNum + 1;
+      for (const [queryKey, queryValue] of queryEntries) {
+        if ((queryKey === 'status' && queryValue === 'all') || friend.status === queryValue) {
+          proccessedQueryCount = proccessedQueryCount + 1;
+        } else if (queryKey === 'name' && !query['surname']) {
+          if (friend[queryKey] === queryValue || friend['surname'] === queryValue) {
+            proccessedQueryCount = proccessedQueryCount + 1;
+          }
+        } else if (friend[queryKey] === queryValue) {
+          proccessedQueryCount = proccessedQueryCount + 1;
         }
       }
 
-      if (queryNum === keys.length) {
-        return true;
+      if (proccessedQueryCount === queryEntries.length) {
+        result.push(friend)
       }
-    });
+    }
 
     return JSON.stringify(result);
   }
