@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import ProfilePage from '@/views/ProfilePage/ProfilePage.vue';
 import FriendsPage from '@/views/FriendsPage/FriendsPage.vue';
 import ChatPage from '@/modules/Chat/views/ChatPage.vue';
@@ -8,7 +8,7 @@ import LoginPage from '@/modules/Auth/views/LoginPage.vue';
 import RegistrationPage from '@/modules/Auth/views/RegistrationPage.vue';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -76,7 +76,6 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   if (to.name !== 'login' && to.path !== '/' && to.name !== 'registration' && !authStore.authUser) {
-    console.log('1');
     next({ name: 'login' });
   } else {
     next();
