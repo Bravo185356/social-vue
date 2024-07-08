@@ -32,10 +32,10 @@ const validationRules = {
 
 const formData = ref({
   name: '',
-  surname: '1',
-  login: '1',
-  password: '1',
-  city: '1',
+  surname: '',
+  login: '',
+  password: '',
+  city: '',
 });
 
 const v$ = useVuelidate(validationRules, formData);
