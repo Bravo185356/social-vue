@@ -47,12 +47,10 @@
             </div>
           </template>
           <template v-slot:content>
-            <CustomModal>
-              <template v-slot:activator>
-                <DropMenuItem>
-                  <div>Настройки</div>
-                </DropMenuItem>
-              </template>
+            <DropMenuItem @click="settingDialogActive = true">
+              <div>Настройки</div>
+            </DropMenuItem>
+            <CustomModal v-model="settingDialogActive">
               <template v-slot:title>Настройки</template>
               <template v-slot:content>
                 <v-switch
@@ -90,11 +88,10 @@ const requests = ref([]);
 const authStore = useAuthStore();
 const unreadDialogsStore = useUnreadDialogs();
 const router = useRouter();
-
 const allowOtherUsersCreatePost = ref(false);
+const settingDialogActive = ref(false);
 
 function acceptRequest(userId, requestId) {
-  console.log('accept');
   FriendsController.addFriend(userId);
   requests.value = requests.value.filter((request) => request.id != requestId);
 }
@@ -119,7 +116,7 @@ function changeSettings() {
 
   authStore.updateAuthUser('settings', newSettings);
   UserController.updateSettings(newSettings);
-  closeModal();
+  settingDialogActive.value = false
 }
 
 watchEffect(() => {

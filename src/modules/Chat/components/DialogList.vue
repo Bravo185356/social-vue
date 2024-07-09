@@ -2,12 +2,10 @@
   <section class="dialogs">
     <div class="header">
       <div class="title">Мои диалоги</div>
-      <CustomModal @close-modal="modalActive = false" :isActive="modalActive">
-        <template v-slot:activator>
-          <div @click="showFriendList" class="new-dialog icon-wrapper">
-            <v-icon class="icon" icon="mdi mdi-plus" />
-          </div>
-        </template>
+      <div @click="showFriendList" class="new-dialog icon-wrapper">
+        <v-icon class="icon" icon="mdi mdi-plus" />
+      </div>
+      <CustomModal v-model="newDialogModalActive">
         <template v-slot:title>
           <div>Выберите друга</div>
         </template>
@@ -52,10 +50,10 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const friends = ref([]);
-const modalActive = ref(false);
+const newDialogModalActive = ref(false);
 
 function showFriendList() {
-  modalActive.value = true;
+  newDialogModalActive.value = true;
   friends.value = JSON.parse(FriendsController.getFriends(authStore.authUser.id));
 }
 
