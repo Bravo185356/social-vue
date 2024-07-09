@@ -58,7 +58,7 @@
                   color="rgb(119, 61, 255)"
                   label="Разрешить другим пользователям публиковать посты на вашей странице"
                 />
-                <button @click="changeSettings" class="button">Применить</button>
+                <button v-if="isSaveButtonShow" @click="changeSettings" class="button">Применить</button>
               </template>
             </CustomModal>
             <DropMenuItem @click="logout">
@@ -78,7 +78,7 @@ import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue';
 import { UserController } from '@/data/user/userController';
 import { useUnreadDialogs } from '@/stores/unreadDialogs';
 import { FriendsController } from '@/data/friends/friendsController';
-import { ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import { RequestsController } from '@/data/requests/requestsController';
@@ -118,6 +118,10 @@ function changeSettings() {
   UserController.updateSettings(newSettings);
   settingDialogActive.value = false
 }
+
+const isSaveButtonShow = computed(() => {
+  return authStore.authUser.settings.allowOtherUsersCreatePost !== allowOtherUsersCreatePost.value
+})
 
 watchEffect(() => {
   if (authStore.authUser) {
