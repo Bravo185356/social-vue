@@ -16,18 +16,12 @@
         </span>
       </div>
       <div class="controls">
-        <v-icon
-          v-if="message.author.id === authStore.authUser.id"
-          @click="editMessage"
-          class="icon icon_gray"
-          icon="mdi mdi-pencil"
-        />
-        <v-icon
-          v-if="message.author.id === authStore.authUser.id"
-          @click="deleteMessage"
-          class="icon icon_gray"
-          icon="mdi mdi-delete"
-        />
+        <div class="icon-wrapper-gray">
+          <v-icon v-if="message.author.id === authStore.authUser.id" @click="editMessage" icon="mdi mdi-pencil" />
+        </div>
+        <div class="icon-wrapper-gray">
+          <v-icon v-if="message.author.id === authStore.authUser.id" @click="deleteMessage" icon="mdi mdi-delete" />
+        </div>
       </div>
     </div>
   </li>

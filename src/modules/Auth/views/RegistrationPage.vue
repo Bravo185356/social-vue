@@ -1,7 +1,7 @@
 <template>
   <section class="registration block">
     <div class="header">
-      <RouterLink to="/login" class="icon-wrapper">
+      <RouterLink to="/login" class="icon-wrapper-gray">
         <v-icon icon="mdi mdi-arrow-left" />
       </RouterLink>
       <div class="title">Регистрация</div>

@@ -15,9 +15,9 @@
       <div
         v-if="route.params.id == authStore.authUser.id || comment.author.id == authStore.authUser.id"
         @click="deleteComment(comment.id)"
-        class="icon-wrapper icon-wrapper_gray"
+        class="icon-wrapper-gray"
       >
-        <span><v-icon icon="mdi mdi-delete" class="icon icon_gray" /></span>
+        <span><v-icon icon="mdi mdi-delete" /></span>
       </div>
     </div>
   </div>

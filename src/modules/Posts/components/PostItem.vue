@@ -12,8 +12,8 @@
         </div>
         <div class="create-date">{{ formatDate(post.created) }}</div>
       </div>
-      <div v-if="route.params.id == authStore.authUser.id" @click="deletePost" class="delete icon-wrapper icon-wrapper_gray">
-        <span><v-icon icon="mdi mdi-delete" class="icon icon_gray" /></span>
+      <div v-if="route.params.id == authStore.authUser.id" @click="deletePost" class="delete icon-wrapper-gray">
+        <span><v-icon icon="mdi mdi-delete" /></span>
       </div>
     </div>
     <div class="title">{{ post.title }}</div>

@@ -2,7 +2,7 @@
   <section class="dialogs">
     <div class="header">
       <div class="title">Мои диалоги</div>
-      <div @click="showFriendList" class="new-dialog icon-wrapper">
+      <div @click="showFriendList" class="new-dialog icon-wrapper-gray">
         <v-icon class="icon" icon="mdi mdi-plus" />
       </div>
       <CustomModal v-model="newDialogModalActive">

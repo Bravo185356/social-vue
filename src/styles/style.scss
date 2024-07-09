@@ -75,37 +75,36 @@
     font-size: 14px;
 }
 
-.icon-wrapper {
+.icon-wrapper-purple,
+.icon-wrapper-gray {
+    display: flex;
     cursor: pointer;
     padding: 5px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+}
+
+.icon-wrapper-purple {
+    color: white;
 
     &:hover {
         background-color: rgb(135, 102, 211);
         color: white;
     }
-
-    &_gray:hover {
-        background-color: $hover-background;
-    }
 }
 
-.icon {
-    cursor: pointer;
+.icon-wrapper-gray {
+    color: $icon-color-gray;
 
-    &.icon_gray {
-        color: $icon-color-gray;
-
-        &:hover {
-            color: rgb(78, 78, 78);
-        }
+    &:hover {
+        background-color: $hover-background;
+        color: black;
     }
 }
 
 .avatar {
     overflow: hidden;
-    
+
     img {
         border-radius: 50%;
         width: 100%;

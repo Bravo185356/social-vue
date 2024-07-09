@@ -5,12 +5,12 @@
         <RouterLink to="/">Social</RouterLink>
       </div>
       <div v-if="authStore.authUser" class="navigation">
-        <div class="search icon-wrapper">
+        <div class="search icon-wrapper-purple">
           <RouterLink :to="'/search'">
             <v-icon class="icon" icon="mdi mdi-account-search" />
           </RouterLink>
         </div>
-        <div class="chat icon-wrapper">
+        <div class="chat icon-wrapper-purple">
           <RouterLink :to="'/messages'">
             <v-icon class="icon" icon="mdi-message" />
             <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
@@ -18,7 +18,7 @@
         </div>
         <DropMenu>
           <template v-slot:activator>
-            <div class="requests icon-wrapper">
+            <div class="requests icon-wrapper-purple">
               <v-icon icon="mdi-bell"></v-icon>
             </div>
           </template>
