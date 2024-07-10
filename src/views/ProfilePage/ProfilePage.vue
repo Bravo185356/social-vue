@@ -1,8 +1,10 @@
 <template>
-  <div v-if="authStore.authUser">
-    <ProfileBlock :isFriend="isFriend" @delete-friend="removeFriend" :user="user" />
-    <div class="bottom-blocks">
+  <div class="profile-content">
+    <div class="profile-left" v-if="authStore.authUser">
+      <ProfileBlock :isFriend="isFriend" @delete-friend="removeFriend" :user="user" />
       <FriendList :friendList="friends" />
+    </div>
+    <div class="profile-right">
       <PostsBlock :user="user" />
     </div>
   </div>

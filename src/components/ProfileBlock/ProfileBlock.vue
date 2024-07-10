@@ -1,22 +1,37 @@
 <template>
   <section class="profile block">
-    <div>
-      <div class="avatar">
-        <img src="../../assets/default-user-image.png" />
-      </div>
-      <div class="edit">
-        <button v-if="hasFriendRequest" class="button">Отменить запрос</button>
-        <button v-else-if="!isFriend && authStore.authUser.id != route.params.id" @click="addFriend" class="button">Добавить в друзья</button>
-        <button v-else-if="isFriend" @click="$emit('deleteFriend', authStore.authUser.id)" class="button">Удалить из друзей</button>
-      </div>
+    <div class="avatar">
+      <img src="../../assets/default-user-image.png" />
     </div>
     <div class="info">
-      <div class="name">{{ user.name }} {{ user.surname }}</div>
-      <div class="city">Город</div>
-      <div class="phone">Телефон</div>
-    </div>
-    <div>
-      <button @click="redirectToChat" v-if="route.params.id != authStore.authUser.id" class="button">Написать</button>
+      <div>
+        <div class="name">{{ user.name }} {{ user.surname }}</div>
+        <div class="city">Город</div>
+        <div class="phone">Телефон</div>
+      </div>
+      <DropMenu v-if="route.params.id != authStore.authUser.id" :hover="true">
+        <template v-slot:activator>
+          <div class="icon-wrapper-gray">
+            <v-icon icon="mdi mdi-dots-vertical"></v-icon>
+          </div>
+        </template>
+        <template v-slot:content>
+          <ul>
+            <DropMenuItem>
+                <div @click="redirectToChat" v-if="route.params.id != authStore.authUser.id">Написать</div>
+            </DropMenuItem>
+            <DropMenuItem>
+              <div class="edit">
+                <div v-if="hasFriendRequest">Отменить запрос</div>
+                <div v-else-if="!isFriend && authStore.authUser.id != route.params.id" @click="addFriend">
+                  Добавить в друзья
+                </div>
+                <div v-else-if="isFriend" @click="$emit('deleteFriend', authStore.authUser.id)">Удалить из друзей</div>
+              </div>
+            </DropMenuItem>
+          </ul>
+        </template>
+      </DropMenu>
     </div>
   </section>
 </template>
@@ -27,6 +42,8 @@ import { useAuthStore } from '@/stores/auth';
 import { RequestsController } from '@/data/requests/requestsController';
 import { useRequestStore } from '@/stores/requests';
 import { computed } from 'vue';
+import DropMenu from '@/modules/DropMenu/components/DropMenu.vue';
+import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue';
 
 const props = defineProps({
   user: Object,
