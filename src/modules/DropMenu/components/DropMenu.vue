@@ -4,7 +4,7 @@
       <slot name="activator"></slot>
     </div>
     <Transition name="drop-menu">
-      <div v-if="menuActive" :class="{ 'hoverable': hover }" class="drop-menu">
+      <div v-if="menuActive" :class="{ 'hoverable': hover, 'text-wrap': textWrap }" class="drop-menu">
         <slot name="content"></slot>
       </div>
     </Transition>
@@ -15,7 +15,8 @@
 import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
-  hover: Boolean
+  hover: Boolean,
+  textWrap: Boolean
 })
 const emit = defineEmits(['close-drop']);
 
