@@ -16,7 +16,7 @@
             <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
           </RouterLink>
         </div>
-        <DropMenu>
+        <DropMenu :text-wrap="true">
           <template v-slot:activator>
             <div class="requests icon-wrapper-purple">
               <v-icon icon="mdi-bell"></v-icon>
