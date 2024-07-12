@@ -3,12 +3,13 @@
     <CommentItem @delete-comment="deleteComment" v-for="comment in commentList" :key="comment.id" :comment="comment" />
   </div>
   <form class="comment-form">
-    <input v-model="commentInput" class="input" placeholder="Написать комментарий" />
+    <CustomInput v-model="commentInput" placeholder="Написать комментарий" />
     <button class="button" @click.prevent="createComment">Отправить</button>
   </form>
 </template>
 
 <script setup>
+import CustomInput from '@/UI/CustomInput/CustomInput.vue';
 import CommentItem from './CommentItem.vue';
 import { CommentController } from '@/data/comments/commentController';
 import { ref, watchEffect } from 'vue';

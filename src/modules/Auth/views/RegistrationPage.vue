@@ -7,18 +7,18 @@
       <div class="title">Регистрация</div>
     </div>
     <form class="form">
-      <InputBlock placeholder="Имя" :errors="v$.name.$errors" v-model="formData.name" />
-      <InputBlock placeholder="Фамилия" :errors="v$.surname.$errors" v-model="formData.surname" />
-      <InputBlock placeholder="Логин" :errors="v$.login.$errors" v-model="formData.login" />
-      <InputBlock placeholder="Пароль" :errors="v$.password.$errors" v-model="formData.password" />
-      <InputBlock placeholder="Город" :errors="v$.city.$errors" v-model="formData.city" />
+      <CustomInput placeholder="Имя" :errors="v$.name.$errors" v-model="formData.name" />
+      <CustomInput placeholder="Фамилия" :errors="v$.surname.$errors" v-model="formData.surname" />
+      <CustomInput placeholder="Логин" :errors="v$.login.$errors" v-model="formData.login" />
+      <CustomInput placeholder="Пароль" :errors="v$.password.$errors" v-model="formData.password" />
+      <CustomInput placeholder="Город" :errors="v$.city.$errors" v-model="formData.city" />
       <button @click.prevent="createUser" class="button">Зарегистрироваться</button>
     </form>
   </section>
 </template>
 
 <script setup>
-import InputBlock from '@/components/InputBlock/InputBlock.vue';
+import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 import { AuthController } from '@/data/auth/authData';
 import useVuelidate from '@vuelidate/core';
 import { ref } from 'vue';

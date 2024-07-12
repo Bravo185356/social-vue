@@ -3,8 +3,8 @@
     <div class="title">Войти</div>
     <div v-if="notFoundError" class="not-found">Неверный логин или пароль</div>
     <form class="form">
-      <InputBlock placeholder="Логин" :errors="v$.login.$errors" v-model="formData.login" />
-      <InputBlock placeholder="Пароль" :errors="v$.password.$errors" v-model="formData.password" />
+      <CustomInput placeholder="Логин" :errors="v$.login.$errors" v-model="formData.login" />
+      <CustomInput placeholder="Пароль" :errors="v$.password.$errors" v-model="formData.password" />
       <div class="create-account">
         Ещё нету аккаунта? <RouterLink class="link" to="/registration">Создать аккаунт</RouterLink>
       </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import InputBlock from '@/components/InputBlock/InputBlock.vue';
+import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 import { ref } from 'vue';
 import { AuthController } from '@/data/auth/authData';
 import { useAuthStore } from '@/stores/auth';

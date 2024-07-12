@@ -12,7 +12,7 @@
       />
     </ul>
     <form class="message-form">
-      <input v-model="messageInput" type="text" placeholder="Введите сообщение..." class="input" />
+      <CustomInput v-model="messageInput" placeholder="Введите сообщение..." />
       <button @click.prevent="sendMessage" class="button">
         {{ editMessageId ? 'Редактировать' : 'Отправить' }}
       </button>
@@ -21,6 +21,7 @@
 </template>
 
 <script setup>
+import CustomInput from '@/UI/CustomInput/CustomInput.vue';
 import MessageItem from './MessageItem.vue';
 import { ref, watchEffect, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';

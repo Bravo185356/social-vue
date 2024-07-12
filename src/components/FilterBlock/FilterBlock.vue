@@ -1,12 +1,8 @@
 <template>
   <aside class="filter block">
     <form class="filter-form form">
-      <div>
-        <input v-model="nameInput" type="text" placeholder="Имя" class="input" />
-      </div>
-      <div>
-        <input v-model="cityInput" type="text" placeholder="Город" class="input" />
-      </div>
+      <CustomInput v-model="nameInput" placeholder="Имя"  />
+      <CustomInput v-model="cityInput" placeholder="Город"  />
       <div class="filter-online">
         <button @click.prevent="onlyOnlineFriends = false" class="button button_outline" :class="{ active: !onlyOnlineFriends }">
           Все
@@ -22,6 +18,7 @@
 </template>
 
 <script setup>
+import CustomInput from '@/UI/CustomInput/CustomInput.vue';
 import { ref } from 'vue';
 
 const emit = defineEmits(['acceptFilter', 'resetFilter']);
