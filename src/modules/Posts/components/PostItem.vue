@@ -16,7 +16,6 @@
         <span><v-icon icon="mdi mdi-delete" /></span>
       </div>
     </div>
-    <div class="title">{{ post.title }}</div>
     <div class="text" v-html="post.text"></div>
     <div class="controls"></div>
     <CommentList :postId="post.id" />
