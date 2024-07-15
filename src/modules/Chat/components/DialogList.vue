@@ -2,24 +2,23 @@
   <section class="dialogs">
     <div class="header">
       <div class="title">Мои диалоги</div>
-      <div @click="showFriendList" class="new-dialog icon-wrapper-gray">
-        <v-icon class="icon" icon="mdi mdi-plus" />
-      </div>
-      <CustomModal v-model="newDialogModalActive">
-        <template v-slot:title>
-          <div>Выберите друга</div>
+      <DropMenu v-model="showNewDialogDropMenu" :hover="true">
+        <template v-slot:activator>
+          <div @click="showFriendList" class="new-dialog icon-wrapper-gray">
+            <v-icon class="icon" icon="mdi mdi-plus" />
+          </div>
         </template>
         <template v-slot:content>
           <div class="users">
-            <div @click="selectDialogWithFriend(friend.id)" v-for="friend in friends" :key="friend.id" class="user">
+            <DropMenuItem @click="selectDialogWithFriend(friend.id)" v-for="friend in friends" :key="friend.id" class="user">
               <div class="avatar">
                 <img src="@/assets/default-user-image.png" />
               </div>
               <div class="info">{{ friend.name }} {{ friend.surname }}</div>
-            </div>
+            </DropMenuItem>
           </div>
         </template>
-      </CustomModal>
+      </DropMenu>
     </div>
     <div v-if="chats.length" class="dialog-list">
       <DialogItem
@@ -40,6 +39,8 @@ import { FriendsController } from '@/data/friends/friendsController';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import DropMenu from '@/modules/DropMenu/components/DropMenu.vue';
+import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue';
 
 const props = defineProps({
   chats: Array,
@@ -51,6 +52,7 @@ const router = useRouter();
 
 const friends = ref([]);
 const newDialogModalActive = ref(false);
+const showNewDialogDropMenu = ref(false)
 
 function showFriendList() {
   newDialogModalActive.value = true;
