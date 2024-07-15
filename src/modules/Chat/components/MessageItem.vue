@@ -1,11 +1,9 @@
 <template>
   <li class="message">
     <div class="header">
-      <div>
-        <div class="avatar">
-          <img src="@/assets/default-user-image.png" />
-        </div>
-      </div>
+      <RouterLink :to="`/${message.author.id}`" class="avatar">
+        <img src="@/assets/default-user-image.png" />
+      </RouterLink>
       <div class="right-side">
         <div class="info">
           <div class="author link">{{ message.author.name }}</div>
@@ -15,12 +13,12 @@
           {{ message.text }}
         </span>
       </div>
-      <div class="controls">
+      <div v-if="message.author.id === authStore.authUser.id" class="controls">
         <div class="icon-wrapper-gray">
-          <v-icon v-if="message.author.id === authStore.authUser.id" @click="editMessage" icon="mdi mdi-pencil" />
+          <v-icon @click="editMessage" icon="mdi mdi-pencil" />
         </div>
         <div class="icon-wrapper-gray">
-          <v-icon v-if="message.author.id === authStore.authUser.id" @click="deleteMessage" icon="mdi mdi-delete" />
+          <v-icon @click="deleteMessage" icon="mdi mdi-delete" />
         </div>
       </div>
     </div>

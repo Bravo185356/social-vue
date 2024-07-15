@@ -9,7 +9,10 @@
     transition: all 0.2s ease;
     cursor: pointer;
 
-    &:hover,
+    &:hover {
+        background-color: $hover-background;
+    }
+    
     &.selected {
         background-color: $purple-color;
         color: white;
