@@ -22,18 +22,7 @@ import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 import { AuthController } from '@/data/auth/authData';
 import useVuelidate from '@vuelidate/core';
 import { ref } from 'vue';
-import { helpers, minLength, required } from '@vuelidate/validators';
-
-const validationRules = {
-  name: { required: helpers.withMessage('Обязательное поле', required) },
-  surname: { required: helpers.withMessage('Обязательное поле', required) },
-  login: {
-    required: helpers.withMessage('Обязательное поле', required),
-    minLength: helpers.withMessage('Логин должен содержать минимум 6 символов', minLength(6)),
-  },
-  password: { required, minLength: helpers.withMessage('Пароль должен содержать минимум 6 символов', minLength(6)) },
-  city: { required: helpers.withMessage('Обязательное поле', required) },
-};
+import { registrationRules } from '../utils/validationRules';
 
 const formData = ref({
   name: '',
@@ -43,7 +32,7 @@ const formData = ref({
   city: '',
 });
 
-const v$ = useVuelidate(validationRules, formData);
+const v$ = useVuelidate(registrationRules, formData);
 
 async function createUser() {
   const isValid = await v$.value.$validate();

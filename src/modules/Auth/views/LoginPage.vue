@@ -20,22 +20,17 @@ import { AuthController } from '@/data/auth/authData';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import useVuelidate from '@vuelidate/core';
-import { required, helpers } from '@vuelidate/validators';
+import { loginRules } from '../utils/validationRules';
 
 const authStore = useAuthStore();
 const router = useRouter();
-
-const validationRules = {
-  login: { required: helpers.withMessage('Обязательное поле', required) },
-  password: { required: helpers.withMessage('Обязательное поле', required) },
-};
 
 const formData = ref({
   login: 'test11',
   password: 'test11',
 });
 
-const v$ = useVuelidate(validationRules, formData);
+const v$ = useVuelidate(loginRules, formData);
 
 const notFoundError = ref(false);
 
