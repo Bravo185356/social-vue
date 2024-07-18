@@ -1,13 +1,21 @@
 <template>
   <aside class="filter block">
     <form class="filter-form form">
-      <CustomInput v-model="nameInput" placeholder="Имя"  />
-      <CustomInput v-model="cityInput" placeholder="Город"  />
+      <CustomInput v-model="filterParams.name" placeholder="Имя" />
+      <CustomInput v-model="filterParams.city" placeholder="Город" />
       <div class="filter-online">
-        <button @click.prevent="onlyOnlineFriends = false" class="button button_outline" :class="{ active: !onlyOnlineFriends }">
+        <button
+          @click.prevent="filterParams.onlyOnline = false"
+          class="button button_outline"
+          :class="{ active: !filterParams.onlyOnline }"
+        >
           Все
         </button>
-        <button @click.prevent="onlyOnlineFriends = true" class="button button_outline" :class="{ active: onlyOnlineFriends }">
+        <button
+          @click.prevent="filterParams.onlyOnline = true"
+          class="button button_outline"
+          :class="{ active: filterParams.onlyOnline }"
+        >
           Онлайн
         </button>
       </div>
@@ -23,37 +31,40 @@ import { ref } from 'vue';
 
 const emit = defineEmits(['acceptFilter', 'resetFilter']);
 
-const nameInput = ref('Тестовый');
-const cityInput = ref('');
-const onlyOnlineFriends = ref(false);
 const isFiltered = ref(false);
+const filterParams = ref({
+  name: '',
+  city: '',
+  onlyOnline: false,
+});
 
 function resetFilter() {
   emit('resetFilter');
   isFiltered.value = false;
-  onlyOnlineFriends.value = false;
-  nameInput.value = '';
-  cityInput.value = '';
+  filterParams.value.onlyOnline = false;
+  filterParams.value.name = '';
+  filterParams.value.city = '';
+}
+
+function handleName() {
+  const trimName = filterParams.value.name.replace(/(?<=\s.*?)\s+/gs, '');
+  const [name, surname] = trimName.split(' ');
+
+  return surname ? { name, surname } : { name };
 }
 
 function applyFilter() {
-  const name = nameInput.value.split(' ')[0];
-  const surname = nameInput.value.split(' ')[1];
+  let query = {};
 
-  const query = {
-    status: onlyOnlineFriends.value ? 'online' : 'all',
-  };
+  for (const key in filterParams.value) {
+    const filterValue = filterParams.value[key];
 
-  if (surname) {
-    query.surname = surname;
-  }
-
-  if (name) {
-    query.name = name;
-  }
-
-  if (cityInput.value) {
-    query.city = cityInput.value;
+    if (key === 'name') {
+      const editedName = handleName();
+      query = { ...query, ...editedName };
+    } else if (filterValue !== '') {
+      query[key] = filterValue;
+    }
   }
 
   emit('acceptFilter', query);

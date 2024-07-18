@@ -33,7 +33,7 @@ export class UserController {
       let proccessedQueryCount = 0;
 
       for (const [queryKey, queryValue] of queryEntries) {
-        if ((queryKey === 'status' && queryValue === 'all') || user.status === queryValue) {
+        if (queryKey === 'onlyOnline' && (!queryValue || queryValue && user.status === 'online')) {
           proccessedQueryCount = proccessedQueryCount + 1;
         } else if (queryKey === 'name' && !query['surname']) {
           if (user[queryKey] === queryValue || user['surname'] === queryValue) {
