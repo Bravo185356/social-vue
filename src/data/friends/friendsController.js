@@ -1,6 +1,7 @@
 import { userData } from '../user/userModel';
 import { friendsData } from './friendsData';
 import { authUser } from '../auth/authData';
+import { handleUserQueryParams } from '../utils/handleUserQueryParams';
 
 export class FriendsController {
   static getFriends(userId) {
@@ -45,30 +46,17 @@ export class FriendsController {
     };
     friendsData.push(newFriendUserId);
   }
-  
+
   static getFilteredFriendList(query, userId) {
-    const friends = friendsData.filter((friend) => friend.whose == userId);
-    const result = [];
-    const queryEntries = Object.entries(query);
+    const filteredUsers = [];
+    let friends = friendsData.filter((friend) => friend.whose == userId);
 
     for (let i = 0; i < friends.length; i++) {
-      const friend = friends[i];
-      let proccessedQueryCount = 0;
+      const user = friends[i];
+      const result = handleUserQueryParams(user, query);
 
-      for (const [queryKey, queryValue] of queryEntries) {
-        if ((queryKey === 'status' && queryValue === 'all') || friend.status === queryValue) {
-          proccessedQueryCount = proccessedQueryCount + 1;
-        } else if (queryKey === 'name' && !query['surname']) {
-          if (friend[queryKey] === queryValue || friend['surname'] === queryValue) {
-            proccessedQueryCount = proccessedQueryCount + 1;
-          }
-        } else if (friend[queryKey] === queryValue) {
-          proccessedQueryCount = proccessedQueryCount + 1;
-        }
-      }
-
-      if (proccessedQueryCount === queryEntries.length) {
-        result.push(friend)
+      if (result) {
+        filteredUsers.push(result);
       }
     }
 

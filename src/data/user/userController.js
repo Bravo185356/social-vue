@@ -1,4 +1,5 @@
 import { authUser } from '../auth/authData';
+import { handleUserQueryParams } from '../utils/handleUserQueryParams';
 import { userData } from './userModel';
 
 export class UserController {
@@ -25,37 +26,18 @@ export class UserController {
   }
 
   static getFilteredUserList(query) {
-    const result = [];
-    const queryEntries = Object.entries(query);
+    const filteredUsers = []
 
     for (let i = 0; i < userData.length; i++) {
       const user = userData[i];
-      let proccessedQueryCount = 0;
+      const result = handleUserQueryParams(user, query)
 
-      for (const [queryKey, queryValue] of queryEntries) {
-        if (queryKey === 'onlyOnline' && (!queryValue || queryValue && user.status === 'online')) {
-          proccessedQueryCount = proccessedQueryCount + 1;
-        } else if (queryKey === 'name' && !query['surname']) {
-          if (user[queryKey] === queryValue || user['surname'] === queryValue) {
-            proccessedQueryCount = proccessedQueryCount + 1;
-          }
-        } else if (user[queryKey] === queryValue) {
-          proccessedQueryCount = proccessedQueryCount + 1;
-        }
-      }
-
-      if (proccessedQueryCount === queryEntries.length) {
-        result.push({
-          id: user.id,
-          name: user.name,
-          surname: user.surname,
-          city: user.city,
-          status: user.status,
-        });
+      if(result) {
+        filteredUsers.push(result)
       }
     }
 
-    return JSON.stringify(result);
+    return JSON.stringify(filteredUsers);
   }
 
   static getUnreadedDialogs(userId) {
