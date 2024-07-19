@@ -27,12 +27,12 @@
 
 <script setup>
 import CustomInput from '@/UI/CustomInput/CustomInput.vue';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['acceptFilter', 'resetFilter']);
 
 const isFiltered = ref(false);
-const filterParams = ref({
+const filterParams = reactive({
   name: '',
   city: '',
   onlyOnline: false,
@@ -41,9 +41,9 @@ const filterParams = ref({
 function resetFilter() {
   emit('resetFilter');
   isFiltered.value = false;
-  filterParams.value.onlyOnline = false;
-  filterParams.value.name = '';
-  filterParams.value.city = '';
+  filterParams.onlyOnline = false;
+  filterParams.name = '';
+  filterParams.city = '';
 }
 
 function handleName() {
@@ -56,8 +56,8 @@ function handleName() {
 function applyFilter() {
   let query = {};
 
-  for (const key in filterParams.value) {
-    const filterValue = filterParams.value[key];
+  for (const key in filterParams) {
+    const filterValue = filterParams[key];
 
     if (key === 'name') {
       const editedName = handleName();
