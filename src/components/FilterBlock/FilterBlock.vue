@@ -47,8 +47,9 @@ function resetFilter() {
 }
 
 function handleName() {
-  const trimName = filterParams.value.name.replace(/(?<=\s.*?)\s+/gs, '');
-  const [name, surname] = trimName.split(' ');
+  const splitedName = filterParams.name.trim().split(/\s+/)
+  const formatedName = splitedName.slice(0, 2).join(' ') + splitedName.slice(2).join('')
+  const [name, surname] = formatedName.split(' ');
 
   return surname ? { name, surname } : { name };
 }
