@@ -45,40 +45,32 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginPage,
-      beforeEnter: (to, from, next) => {
+      beforeEnter: () => {
         const authStore = useAuthStore();
 
-        if (authStore.authUser) {
-          next({ path: `/${authStore.authUser.id}` });
-        } else {
-          next();
-        }
+        return authStore.authUser ? `/${authStore.authUser.id}` : true
       },
     },
     {
       path: '/registration',
       name: 'registration',
       component: RegistrationPage,
-      beforeEnter: (to, from, next) => {
+      beforeEnter: () => {
         const authStore = useAuthStore();
 
-        if (authStore.authUser) {
-          next({ path: `/${authStore.authUser.id}` });
-        } else {
-          next();
-        }
+        return authStore.authUser ? `/${authStore.authUser.id}` : true
       },
     },
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const authStore = useAuthStore();
 
   if (to.name !== 'login' && to.path !== '/' && to.name !== 'registration' && !authStore.authUser) {
-    next({ name: 'login' });
+    return '/login'
   } else {
-    next();
+    return true
   }
 });
 
