@@ -48,8 +48,18 @@
         background-color: inherit;
         color: black;
 
-        &:hover,
         &.active {
+            color: white;
+            background-color: $purple-color;
+
+            &:hover,
+            &:focus {
+                background-color: $purple-color-hover;
+            }
+        }
+
+        &:hover,
+        &:focus {
             background-color: $hover-background;
         }
     }

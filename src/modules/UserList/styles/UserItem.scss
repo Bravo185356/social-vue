@@ -16,6 +16,12 @@
     font-size: 14px;
 }
 
-.user-link:hover {
-    color: $purple-color;
+.user-link {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+
+    &:hover,
+    &:focus {
+        color: $purple-color;
+    }
 }
