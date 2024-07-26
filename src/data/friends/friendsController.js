@@ -60,6 +60,6 @@ export class FriendsController {
       }
     }
 
-    return JSON.stringify(result);
+    return JSON.stringify(filteredUsers);
   }
 }
