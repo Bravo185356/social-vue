@@ -37,7 +37,8 @@
   transition: opacity 0.2s ease;
 }
 
-.hoverable :deep(.drop-menu-item:hover) {
+.hoverable :deep(.drop-menu-item:hover),
+.hoverable :deep(.drop-menu-item:focus) {
   transition: background-color 0.3s ease;
   cursor: pointer;
   background-color: $hover-background;

@@ -25,7 +25,8 @@
     color: $purple-color;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
         text-decoration: underline;
     }
 }
@@ -38,7 +39,8 @@
     transition: background-color 0.2s ease;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $purple-color-hover;
     }
 
@@ -76,8 +78,9 @@
 .icon-wrapper-purple {
     color: white;
 
-    &:hover {
-        background-color: rgb(135, 102, 211);
+    &:hover,
+    &:focus {
+        background-color: rgb(150, 112, 238);
         color: white;
     }
 }
@@ -85,7 +88,8 @@
 .icon-wrapper-gray {
     color: $icon-color-gray;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $hover-background;
         color: black;
     }

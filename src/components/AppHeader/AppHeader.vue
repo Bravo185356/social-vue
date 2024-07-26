@@ -1,26 +1,20 @@
 <template>
   <header class="header block">
     <div class="header-container">
-      <div class="logo">
-        <RouterLink to="/">Social</RouterLink>
-      </div>
-      <div v-if="authStore.authUser" class="navigation">
-        <div class="search icon-wrapper-purple">
-          <RouterLink :to="'/search'">
-            <v-icon class="icon" icon="mdi mdi-account-search" />
-          </RouterLink>
-        </div>
-        <div class="chat icon-wrapper-purple">
-          <RouterLink :to="'/messages'">
-            <v-icon class="icon" icon="mdi-message" />
-            <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
-          </RouterLink>
-        </div>
+      <RouterLink class="logo icon-wrapper-purple" to="/">Social</RouterLink>
+      <nav v-if="authStore.authUser" class="navigation">
+        <RouterLink :to="'/search'" class="search icon-wrapper-purple">
+          <v-icon class="icon" icon="mdi mdi-account-search" />
+        </RouterLink>
+        <RouterLink class="chat icon-wrapper-purple" :to="'/messages'">
+          <v-icon class="icon" icon="mdi-message" />
+          <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
+        </RouterLink>
         <DropMenu :text-wrap="true">
           <template v-slot:activator>
-            <div class="requests icon-wrapper-purple">
+            <button class="requests icon-wrapper-purple">
               <v-icon icon="mdi-bell"></v-icon>
-            </div>
+            </button>
           </template>
           <template v-slot:content>
             <template v-if="requests.length">
@@ -42,9 +36,9 @@
         </DropMenu>
         <DropMenu :hover="true">
           <template v-slot:activator>
-            <div class="avatar">
+            <button class="avatar icon-wrapper-purple">
               <img src="../../assets/default-user-image.png" />
-            </div>
+            </button>
           </template>
           <template v-slot:content>
             <DropMenuItem @click="settingDialogActive = true">
@@ -66,7 +60,7 @@
             </DropMenuItem>
           </template>
         </DropMenu>
-      </div>
+      </nav>
     </div>
   </header>
 </template>
@@ -116,12 +110,12 @@ function changeSettings() {
 
   authStore.updateAuthUser('settings', newSettings);
   UserController.updateSettings(newSettings);
-  settingDialogActive.value = false
+  settingDialogActive.value = false;
 }
 
 const isSaveButtonShow = computed(() => {
-  return authStore.authUser.settings.allowOtherUsersCreatePost !== allowOtherUsersCreatePost.value
-})
+  return authStore.authUser.settings.allowOtherUsersCreatePost !== allowOtherUsersCreatePost.value;
+});
 
 watchEffect(() => {
   if (authStore.authUser) {

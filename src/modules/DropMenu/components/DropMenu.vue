@@ -4,9 +4,9 @@
       <slot name="activator"></slot>
     </div>
     <Transition name="drop-menu">
-      <div v-if="menuActive" :class="{ 'hoverable': hover, 'text-wrap': textWrap }" class="drop-menu">
+      <ul v-if="menuActive" :class="{ hoverable: hover, 'text-wrap': textWrap }" class="drop-menu">
         <slot name="content"></slot>
-      </div>
+      </ul>
     </Transition>
   </div>
 </template>
