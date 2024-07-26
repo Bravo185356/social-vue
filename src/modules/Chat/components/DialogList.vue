@@ -33,7 +33,6 @@
 </template>
 
 <script setup>
-import CustomModal from '@/UI/Modal/CustomModal.vue';
 import DialogItem from './DialogItem.vue';
 import { FriendsController } from '@/data/friends/friendsController';
 import { useAuthStore } from '@/stores/auth';
