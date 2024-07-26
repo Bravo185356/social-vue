@@ -47,6 +47,10 @@ function resetFilter() {
 }
 
 function handleName() {
+  if(!filterParams.name) {
+    return
+  }
+
   const splitedName = filterParams.name.trim().split(/\s+/)
   const formatedName = splitedName.slice(0, 2).join(' ') + splitedName.slice(2).join('')
   const [name, surname] = formatedName.split(' ');
@@ -62,7 +66,10 @@ function applyFilter() {
 
     if (key === 'name') {
       const editedName = handleName();
-      query = { ...query, ...editedName };
+
+      if(editedName) {
+        query = { ...query, ...editedName };
+      }
     } else if (filterValue !== '') {
       query[key] = filterValue;
     }
