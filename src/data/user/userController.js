@@ -3,9 +3,19 @@ import { handleUserQueryParams } from '../utils/handleUserQueryParams';
 import { userData } from './userModel';
 
 export class UserController {
-  static fetchUser(id) {
-    const user = userData.find((user) => user.id == id);
-    return JSON.stringify(user);
+  static fetchUser(userId) {
+    const {id, name, surname, city, status, settings} = userData.find((user) => user.id == userId);
+
+    const response = {
+      id,
+      name,
+      surname,
+      city,
+      status,
+      settings,
+    }
+
+    return JSON.stringify(response);
   }
 
   static updateSettings(newSettings) {
