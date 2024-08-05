@@ -41,7 +41,7 @@ function createPost() {
 }
 
 const showCreatePostForm = computed(() => {
-  if (route.params.id == authStore.authUser.id || !props.user.settings.allowOtherUsersCreatePost) {
+  if (route.params.id == authStore.authUser.id || props.user.settings.allowOtherUsersCreatePost) {
     return true;
   } else {
     return false;
