@@ -1,12 +1,12 @@
 <template>
   <li class="message">
     <div class="header">
-      <RouterLink :to="`/${message.author.id}`" class="avatar">
+      <RouterLink tabindex="-1" :to="`/${message.author.id}`" class="avatar">
         <img src="@/assets/default-user-image.png" />
       </RouterLink>
       <div class="right-side">
         <div class="info">
-          <div class="author link">{{ message.author.name }}</div>
+          <RouterLink :to="`/${message.author.id}`" class="link">{{ message.author.name }}</RouterLink>
           <div class="date">{{ formatDate(message.created) }}</div>
         </div>
         <span>
@@ -14,12 +14,12 @@
         </span>
       </div>
       <div v-if="message.author.id === authStore.authUser.id" class="controls">
-        <div class="icon-wrapper-gray">
-          <v-icon @click="editMessage" icon="mdi mdi-pencil" />
-        </div>
-        <div class="icon-wrapper-gray">
-          <v-icon @click="deleteMessage" icon="mdi mdi-delete" />
-        </div>
+        <button @click="editMessage" class="icon-wrapper-gray">
+          <v-icon icon="mdi mdi-pencil" />
+        </button>
+        <button @click="deleteMessage" class="icon-wrapper-gray">
+          <v-icon icon="mdi mdi-delete" />
+        </button>
       </div>
     </div>
   </li>

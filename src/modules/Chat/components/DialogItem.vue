@@ -1,5 +1,5 @@
 <template>
-  <div @click="selectChat" class="dialog" :class="{ selected: chat.user.id == route.query.id }">
+  <div tabindex="0" @click="selectChat" class="dialog" :class="{ selected: chat.user.id == route.query.id }">
     <div class="avatar">
       <img src="@/assets/default-user-image.png" />
     </div>
@@ -46,11 +46,7 @@ const dialogIsUnread = computed(() => {
     return;
   }
 
-  if (unreadDialog) {
-    return unreadDialog.numOfUnreadMessages;
-  } else {
-    return false;
-  }
+  return unreadDialog ? unreadDialog.numOfUnreadMessages : false
 });
 // Если есть lastMessage, то возвращаем автора и текст
 const lastMessage = computed(() => {

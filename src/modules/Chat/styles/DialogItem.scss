@@ -9,7 +9,8 @@
     transition: all 0.2s ease;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $hover-background;
     }
     
