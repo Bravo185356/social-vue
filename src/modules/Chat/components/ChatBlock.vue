@@ -12,7 +12,7 @@
       />
     </ul>
     <form class="message-form">
-      <CustomInput v-model="messageInput" placeholder="Введите сообщение..." />
+      <CustomInput autofocus v-model="messageInput" placeholder="Введите сообщение..." />
       <button @click.prevent="sendMessage" class="button">
         {{ editMessageId ? 'Редактировать' : 'Отправить' }}
       </button>
@@ -23,7 +23,7 @@
 <script setup>
 import CustomInput from '@/UI/CustomInput/CustomInput.vue';
 import MessageItem from './MessageItem.vue';
-import { ref, watchEffect, computed, watch } from 'vue';
+import { ref, watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { ChatController } from '@/data/chat/chatController';
 import { useAuthStore } from '@/stores/auth';
