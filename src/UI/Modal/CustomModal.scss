@@ -19,9 +19,9 @@
     padding: 20px;
     transform: translate(-50%, -50%);
     max-width: 500px;
-    background-color: white;
+    background-color: $block-background;
     border-radius: 10px;
-    box-shadow: $box-shadow;
+    box-shadow: $block-shadow;
 }
 
 .title {

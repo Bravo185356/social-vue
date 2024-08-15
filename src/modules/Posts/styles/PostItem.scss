@@ -17,15 +17,11 @@
     flex: 1 1 auto;
 }
 
-.author-name {
-    color: $purple-color;
-}
-
 .header {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid rgb(194, 194, 194);
+    // border-bottom: 1px solid $border-color;
     padding-bottom: 10px;
 }
 
@@ -39,5 +35,5 @@
     align-items: center;
     gap: 10px;
     padding: 10px 0px;
-    border-bottom: 1px solid rgb(194, 194, 194);
+    border-bottom: 1px solid $border-color;
 }

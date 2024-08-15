@@ -1,7 +1,7 @@
 <template>
   <section class="friends block">
     <div class="total-num">
-      <RouterLink :to="`/friends/${route.params.id}`">Друзья {{ props.friendList.length }}</RouterLink>
+      <RouterLink :to="`/friends/${route.params.id}`" class="link">Друзья {{ props.friendList.length }}</RouterLink>
     </div>
     <ul v-if="props.friendList.length" class="friend-list">
       <li v-for="friend in slicedFriends" :key="friend.id">

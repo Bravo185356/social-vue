@@ -4,7 +4,7 @@
       <div class="modal-body">
         <div class="title">
           <slot name="title"></slot>
-          <div class="icon-wrapper-gray">
+          <div class="icon-wrapper">
             <v-icon @click="model = false" icon="mdi mdi-window-close" class="close" />
           </div>
         </div>

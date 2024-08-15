@@ -1,9 +1,9 @@
 <template>
   <div class="post-filter block">
-    <button @click="$emit('updateFilter', 'all')" class="button button_outline" :class="{ active: filterType === 'all' }">
+    <button @click="$emit('updateFilter', 'all')" class="button button_plain" :class="{ active: filterType === 'all' }">
       Все записи
     </button>
-    <button @click="$emit('updateFilter', 'userOnly')" class="button button_outline" :class="{ active: filterType === 'userOnly' }">
+    <button @click="$emit('updateFilter', 'userOnly')" class="button button_plain" :class="{ active: filterType === 'userOnly' }">
       Записи пользователя
     </button>
   </div>

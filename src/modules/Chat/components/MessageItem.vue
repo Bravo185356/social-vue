@@ -14,10 +14,10 @@
         </span>
       </div>
       <div v-if="message.author.id === authStore.authUser.id" class="controls">
-        <button @click="editMessage" class="icon-wrapper-gray">
+        <button @click="editMessage" class="icon-wrapper">
           <v-icon icon="mdi mdi-pencil" />
         </button>
-        <button @click="deleteMessage" class="icon-wrapper-gray">
+        <button @click="deleteMessage" class="icon-wrapper">
           <v-icon icon="mdi mdi-delete" />
         </button>
       </div>

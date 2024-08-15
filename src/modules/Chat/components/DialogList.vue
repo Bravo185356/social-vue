@@ -4,7 +4,7 @@
       <div class="title">Мои диалоги</div>
       <DropMenu v-model="showNewDialogDropMenu" :hover="true">
         <template v-slot:activator>
-          <button @click="showFriendList" class="new-dialog icon-wrapper-gray">
+          <button @click="showFriendList" class="new-dialog icon-wrapper">
             <v-icon class="icon" icon="mdi mdi-plus" />
           </button>
         </template>

@@ -1,7 +1,7 @@
 @import '@/styles/_variables.scss';
 
 .wrapper {
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(22, 22, 22);
     min-height: 100vh;
 
     &__container {
@@ -10,29 +10,52 @@
     }
 }
 
+* {
+    color: #e9ecf0;
+}
+
 [class*=container] {
     max-width: 960px;
     margin: 0px auto;
 }
 
 .block {
-    box-shadow: $box-shadow;
+    box-shadow: $block-shadow;
+    color: white;
     border-radius: 10px;
     background-color: $block-background;
 }
 
 .link {
-    color: $purple-color;
-    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    color: $blue-color;
+    
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        height: 2px;
+        width: 0;
+        background-color: $blue-color;
+        transition: all 0.2s ease;
+    }
 
     &:hover,
     &:focus {
-        text-decoration: underline;
+        color: $blue-hover;
+
+        &::after {
+            width: 100%;
+            transform: translateX(-50%);
+        }
     }
+
 }
 
 .button {
-    background-color: $purple-color;
+    background-color: $button-background;
     border-radius: 5px;
     padding: 5px 15px;
     color: white;
@@ -41,26 +64,20 @@
 
     &:hover,
     &:focus {
-        background-color: $purple-color-hover;
+        background-color: $button-background-hover;
     }
 
-    &_outline {
+    &_plain {
         background-color: inherit;
-        color: black;
-
-        &.active {
-            color: white;
-            background-color: $purple-color;
-
-            &:hover,
-            &:focus {
-                background-color: $purple-color-hover;
-            }
-        }
 
         &:hover,
         &:focus {
-            background-color: $hover-background;
+            background-color: $button-background-hover;
+        }
+
+        &.active {
+            color: white;
+            background-color: $button-background;
         }
     }
 }
@@ -76,8 +93,7 @@
     font-size: 14px;
 }
 
-.icon-wrapper-purple,
-.icon-wrapper-gray {
+.icon-wrapper {
     display: flex;
     cursor: pointer;
     padding: 5px;
@@ -85,23 +101,12 @@
     transition: background-color 0.3s ease;
 }
 
-.icon-wrapper-purple {
-    color: white;
-
-    &:hover,
-    &:focus {
-        background-color: rgb(150, 112, 238);
-        color: white;
-    }
-}
-
-.icon-wrapper-gray {
-    color: $icon-color-gray;
+.icon-wrapper {
+    color: rgb(212, 212, 212);
 
     &:hover,
     &:focus {
         background-color: $hover-background;
-        color: black;
     }
 }
 

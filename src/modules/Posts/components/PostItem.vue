@@ -12,9 +12,9 @@
         </div>
         <div class="create-date">{{ formatDate(post.created) }}</div>
       </div>
-      <div v-if="route.params.id == authStore.authUser.id" @click="deletePost" class="delete icon-wrapper-gray">
+      <button v-if="route.params.id == authStore.authUser.id" @click="deletePost" class="delete icon-wrapper">
         <span><v-icon icon="mdi mdi-delete" /></span>
-      </div>
+      </button>
     </div>
     <div class="text" v-html="post.text"></div>
     <div class="controls"></div>

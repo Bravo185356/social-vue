@@ -12,13 +12,13 @@
       <div>{{ comment.text }}</div>
     </div>
     <div class="controls">
-      <div
+      <button
         v-if="route.params.id == authStore.authUser.id || comment.author.id == authStore.authUser.id"
         @click="deleteComment(comment.id)"
-        class="icon-wrapper-gray"
+        class="icon-wrapper"
       >
         <span><v-icon icon="mdi mdi-delete" /></span>
-      </div>
+      </button>
     </div>
   </div>
 </template>

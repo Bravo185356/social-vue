@@ -6,14 +6,14 @@
       <div class="filter-online">
         <button
           @click.prevent="filterParams.onlyOnline = false"
-          class="button button_outline"
+          class="button button_plain"
           :class="{ active: !filterParams.onlyOnline }"
         >
           Все
         </button>
         <button
           @click.prevent="filterParams.onlyOnline = true"
-          class="button button_outline"
+          class="button button_plain"
           :class="{ active: filterParams.onlyOnline }"
         >
           Онлайн

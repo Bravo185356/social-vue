@@ -1,18 +1,18 @@
 <template>
   <header class="header block">
     <div class="header-container">
-      <RouterLink class="logo icon-wrapper-purple" to="/">Social</RouterLink>
+      <RouterLink class="logo icon-wrapper" to="/">Social</RouterLink>
       <nav v-if="authStore.authUser" class="navigation">
-        <RouterLink :to="'/search'" class="search icon-wrapper-purple">
+        <RouterLink :to="'/search'" class="search icon-wrapper">
           <v-icon class="icon" icon="mdi mdi-account-search" />
         </RouterLink>
-        <RouterLink class="chat icon-wrapper-purple" :to="'/messages'">
+        <RouterLink class="chat icon-wrapper" :to="'/messages'">
           <v-icon class="icon" icon="mdi-message" />
           <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
         </RouterLink>
         <DropMenu :text-wrap="true">
           <template v-slot:activator>
-            <button class="requests icon-wrapper-purple">
+            <button class="requests icon-wrapper">
               <v-icon icon="mdi-bell"></v-icon>
             </button>
           </template>
@@ -36,7 +36,7 @@
         </DropMenu>
         <DropMenu :hover="true">
           <template v-slot:activator>
-            <button class="avatar icon-wrapper-purple">
+            <button class="avatar icon-wrapper">
               <img src="../../assets/default-user-image.png" />
             </button>
           </template>

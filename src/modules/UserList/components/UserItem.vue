@@ -5,7 +5,7 @@
       <OnlineStatus :status="user.status" />
     </div>
     <div>
-      <RouterLink class="user-link" :to="`/${user.id}`">{{ user.name }} {{ user.surname }}</RouterLink>
+      <RouterLink class="user-link link" :to="`/${user.id}`">{{ user.name }} {{ user.surname }}</RouterLink>
       <div class="city">{{ user.city }}</div>
     </div>
   </div>
