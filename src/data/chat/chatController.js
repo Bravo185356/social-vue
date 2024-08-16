@@ -67,8 +67,17 @@ export class ChatController {
   }
 
   static removeMessage(messageId, chatId) {
-    const chat = chatData.find((chat) => chat.id == chatId);
-    chat.messages = chat.messages.filter((message) => message.id != messageId);
+    const chat = chatData.find(chat => chat.id === chatId)
+    chat.messages = chat.messages.filter(message => message.id !== messageId)
+
+    if (!chat.messages.length) {
+      this.deleteChatItem(chat.id)
+    }
+  }
+
+  static deleteChatItem(id) {
+    const chatIndex = chatData.findIndex(chatItem => chatItem.id === id)
+    chatData.splice(chatIndex, 1)
   }
 
   static editMessageText(chatId, messageId, messageText) {
