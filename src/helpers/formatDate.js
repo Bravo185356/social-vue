@@ -1,31 +1,14 @@
 export function formatDate(dateStr) {
-  let date = new Date(dateStr);
+  const date = new Date(dateStr)
 
-  let day = date.getDate();
-  let month = date.getMonth();
-  let year = date.getFullYear();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
+  const dateTimeFormat = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'short',
+    timeStyle: 'short'
+  }).format(date)
 
-  if (day < 10) {
-    day = '0' + day;
-  }
-
-  if (month < 10) {
-    month = '0' + month;
-  }
-
-  if (hours < 10) {
-    hours = '0' + hours;
-  }
-
-  if (minutes < 10) {
-    minutes = '0' + minutes;
-  }
-
-  if (day == new Date().getDate()) {
-    return `Сегодня ${hours}:${minutes}`;
+  if(date.getDay() === new Date().getDay()) {
+    return `Сегодня ${date.getHours()}:${date.getMinutes()}`
   } else {
-    return `${day}.${month}.${year}`;
+    return dateTimeFormat.replaceAll('/', '.').split(',')[0]
   }
 }
