@@ -1,13 +1,15 @@
 {
   "name": "package.json",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
@@ -18,9 +20,11 @@
     "vuetify": "^3.6.6"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.25.2",
     "@mdi/font": "^7.4.47",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.5",
+    "eslint": "^8.57.0",
     "jsdom": "^24.0.0",
     "sass": "^1.77.1",
     "sass-loader": "^14.2.1",
