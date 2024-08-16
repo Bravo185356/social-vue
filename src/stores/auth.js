@@ -1,20 +1,20 @@
-import { ref } from 'vue';
-import { defineStore } from 'pinia';
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', () => {
-  const authUser = ref(null);
+  const authUser = ref(null)
 
   function setAuthUser(user) {
-    authUser.value = user;
+    authUser.value = user
   }
 
   function $reset() {
-    authUser.value = null;
+    authUser.value = null
   }
 
   function updateAuthUser(fieldName, updatedValue) {
-    authUser.value[fieldName] = updatedValue;
+    authUser.value[fieldName] = updatedValue
   }
 
-  return { authUser, setAuthUser, $reset, updateAuthUser };
-});
+  return { authUser, setAuthUser, $reset, updateAuthUser }
+})

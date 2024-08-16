@@ -1,10 +1,10 @@
-import { userData } from '../user/userModel';
+import { userData } from '../user/userModel'
 
-let authUser = {};
+let authUser = {}
 
 class AuthController {
   static getUser(login, password) {
-    const user = userData.find((user) => user.login === login && user.password === password);
+    const user = userData.find(user => user.login === login && user.password === password)
 
     if (user) {
       const authResponse = {
@@ -14,18 +14,18 @@ class AuthController {
         city: user.city,
         settings: user.settings,
         unreadDialog: user.unreadDialog,
-      };
+      }
 
-      authUser = authResponse;
-      return JSON.stringify(authResponse);
+      authUser = authResponse
+      return JSON.stringify(authResponse)
     } else {
-      return JSON.stringify({ error: 'Неверный логин или пароль' });
+      return JSON.stringify({ error: 'Неверный логин или пароль' })
     }
   }
 
   static getUserWithToken(token) {
-    const user = userData.find((user) => user.id == token);
-    authUser = user;
+    const user = userData.find(user => user.id === +token)
+    authUser = user
 
     const authResponse = {
       id: user.id,
@@ -34,9 +34,9 @@ class AuthController {
       city: user.city,
       settings: user.settings,
       unreadDialog: user.unreadDialog,
-    };
+    }
 
-    return JSON.stringify(authResponse);
+    return JSON.stringify(authResponse)
   }
 
   static createUser(data) {
@@ -46,10 +46,10 @@ class AuthController {
       status: 'offline',
       unreadDialog: [],
       settings: { allowOtherUsersCreatePost: false },
-    };
+    }
 
-    userData.push(newUser);
+    userData.push(newUser)
   }
 }
 
-export { AuthController, authUser };
+export { AuthController, authUser }

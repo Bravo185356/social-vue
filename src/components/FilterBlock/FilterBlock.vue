@@ -1,84 +1,101 @@
-<template>
-  <aside class="filter block">
-    <form class="filter-form form">
-      <CustomInput v-model="filterParams.name" placeholder="Имя" />
-      <CustomInput v-model="filterParams.city" placeholder="Город" />
-      <div class="filter-online">
-        <button
-          @click.prevent="filterParams.onlyOnline = false"
-          class="button button_plain"
-          :class="{ active: !filterParams.onlyOnline }"
-        >
-          Все
-        </button>
-        <button
-          @click.prevent="filterParams.onlyOnline = true"
-          class="button button_plain"
-          :class="{ active: filterParams.onlyOnline }"
-        >
-          Онлайн
-        </button>
-      </div>
-      <button @click.prevent="applyFilter" class="button">Поиск</button>
-      <button v-if="isFiltered" @click="resetFilter" class="button">Сбросить</button>
-    </form>
-  </aside>
-</template>
-
 <script setup>
-import CustomInput from '@/UI/CustomInput/CustomInput.vue';
-import { reactive, ref } from 'vue';
+import { reactive, ref } from 'vue'
+import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 
-const emit = defineEmits(['acceptFilter', 'resetFilter']);
+const emit = defineEmits(['acceptFilter', 'resetFilter'])
 
-const isFiltered = ref(false);
+const isFiltered = ref(false)
 const filterParams = reactive({
   name: '',
   city: '',
   onlyOnline: false,
-});
+})
 
 function resetFilter() {
-  emit('resetFilter');
-  isFiltered.value = false;
-  filterParams.onlyOnline = false;
-  filterParams.name = '';
-  filterParams.city = '';
+  emit('resetFilter')
+  isFiltered.value = false
+  filterParams.onlyOnline = false
+  filterParams.name = ''
+  filterParams.city = ''
 }
 
 function handleName() {
-  if(!filterParams.name) {
+  if (!filterParams.name) {
     return
   }
 
   const splitedName = filterParams.name.trim().split(/\s+/)
   const formatedName = splitedName.slice(0, 2).join(' ') + splitedName.slice(2).join('')
-  const [name, surname] = formatedName.split(' ');
+  const [name, surname] = formatedName.split(' ')
 
-  return surname ? { name, surname } : { name };
+  return surname ? { name, surname } : { name }
 }
 
 function applyFilter() {
-  let query = {};
+  let query = {}
 
   for (const key in filterParams) {
-    const filterValue = filterParams[key];
+    const filterValue = filterParams[key]
 
     if (key === 'name') {
-      const editedName = handleName();
+      const editedName = handleName()
 
-      if(editedName) {
-        query = { ...query, ...editedName };
+      if (editedName) {
+        query = { ...query, ...editedName }
       }
     } else if (filterValue !== '') {
-      query[key] = filterValue;
+      query[key] = filterValue
     }
   }
 
-  emit('acceptFilter', query);
-  isFiltered.value = true;
+  emit('acceptFilter', query)
+  isFiltered.value = true
 }
 </script>
+
+<template>
+  <aside class="filter block">
+    <form class="filter-form form">
+      <CustomInput
+        v-model="filterParams.name"
+        placeholder="Имя"
+      />
+      <CustomInput
+        v-model="filterParams.city"
+        placeholder="Город"
+      />
+      <div class="filter-online">
+        <button
+          :class="{ active: !filterParams.onlyOnline }"
+          class="button button_plain"
+          @click.prevent="filterParams.onlyOnline = false"
+        >
+          Все
+        </button>
+        <button
+          class="button button_plain"
+          :class="{ active: filterParams.onlyOnline }"
+          @click.prevent="filterParams.onlyOnline = true"
+        >
+          Онлайн
+        </button>
+      </div>
+      <button
+        class="button"
+        @click.prevent="applyFilter"
+      >
+        Поиск
+      </button>
+      <button
+        v-if="isFiltered"
+        class="button"
+        @click="resetFilter"
+      >
+        Сбросить
+      </button>
+    </form>
+  </aside>
+</template>
 
 <style lang="scss" scoped>
 @import url(./FilterBlock.scss);

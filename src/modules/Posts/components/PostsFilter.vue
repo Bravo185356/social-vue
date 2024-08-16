@@ -1,19 +1,29 @@
+<script setup>
+defineProps({
+  filterType: String,
+})
+
+defineEmits(['updateFilter'])
+</script>
+
 <template>
   <div class="post-filter block">
-    <button @click="$emit('updateFilter', 'all')" class="button button_plain" :class="{ active: filterType === 'all' }">
+    <button
+      class="button button_plain"
+      :class="{ active: filterType === 'all' }"
+      @click="$emit('updateFilter', 'all')"
+    >
       Все записи
     </button>
-    <button @click="$emit('updateFilter', 'userOnly')" class="button button_plain" :class="{ active: filterType === 'userOnly' }">
+    <button
+      class="button button_plain"
+      :class="{ active: filterType === 'userOnly' }"
+      @click="$emit('updateFilter', 'userOnly')"
+    >
       Записи пользователя
     </button>
   </div>
 </template>
-
-<script setup>
-const props = defineProps({
-  filterType: String,
-});
-</script>
 
 <style lang="scss" scoped>
 @import url(../styles/PostFilter.scss);

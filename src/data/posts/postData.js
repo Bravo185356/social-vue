@@ -1,4 +1,4 @@
-let postData = [
+const postData = [
   {
     id: 1,
     userId: 1,
@@ -41,6 +41,6 @@ let postData = [
     author: { id: 2, name: 'Тестовый', surname: 'друг2' },
     created: new Date(),
   },
-];
+]
 
-export { postData };
+export { postData }

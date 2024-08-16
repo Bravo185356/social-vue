@@ -1,69 +1,46 @@
-<template>
-  <section v-if="authStore.authUser" class="messages">
-    <div class="title">Диалог с {{ getUserName }}</div>
-    <ul class="message-list">
-      <MessageItem
-        @edit-message="setEditMode"
-        @delete-message="deleteMessage"
-        v-for="message in chatInfo.messages"
-        :key="message.id"
-        :message="message"
-        :chatId="chat.id"
-      />
-    </ul>
-    <form class="message-form">
-      <CustomInput autofocus v-model="messageInput" placeholder="Введите сообщение..." />
-      <button @click.prevent="sendMessage" class="button">
-        {{ editMessageId ? 'Редактировать' : 'Отправить' }}
-      </button>
-    </form>
-  </section>
-</template>
-
 <script setup>
-import CustomInput from '@/UI/CustomInput/CustomInput.vue';
-import MessageItem from './MessageItem.vue';
-import { ref, watchEffect, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { ChatController } from '@/data/chat/chatController';
-import { useAuthStore } from '@/stores/auth';
+import { computed, ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+import MessageItem from './MessageItem.vue'
+import CustomInput from '@/UI/CustomInput/CustomInput.vue'
+import { ChatController } from '@/data/chat/chatController'
+import { useAuthStore } from '@/stores/auth'
 
 const props = defineProps({
   chat: Object,
-});
+})
 
-const route = useRoute();
-const authStore = useAuthStore();
+const emit = defineEmits(['updateLastMessage', 'addEmptyDialog'])
+const route = useRoute()
+const authStore = useAuthStore()
 
-const emit = defineEmits(['updateLastMessage', 'addEmptyDialog']);
-
-const messageInput = ref('');
-const chatInfo = ref([]);
-const editMessageId = ref(null);
+const messageInput = ref('')
+const chatInfo = ref([])
+const editMessageId = ref(null)
 
 function editMessage() {
-  const message = chatInfo.value.messages.find((message) => message.id == editMessageId.value);
-  message.text = messageInput.value;
+  const message = chatInfo.value.messages.find(message => message.id === editMessageId.value)
+  message.text = messageInput.value
 
-  ChatController.editMessageText(props.chat.id, editMessageId.value, messageInput.value);
-  const lastMessage = chatInfo.value.messages[chatInfo.value.messages.length - 1];
+  ChatController.editMessageText(props.chat.id, editMessageId.value, messageInput.value)
+  const lastMessage = chatInfo.value.messages[chatInfo.value.messages.length - 1]
   // Если измененное сообщение является последним, то обновляем last message
-  if (lastMessage.id == editMessageId.value) {
-    emit('updateLastMessage', props.chat.id, message);
+  if (lastMessage.id === editMessageId.value) {
+    emit('updateLastMessage', props.chat.id, message)
   }
 
-  editMessageId.value = null;
-  messageInput.value = '';
+  editMessageId.value = null
+  messageInput.value = ''
 }
 
 function sendMessage() {
   if (editMessageId.value) {
-    editMessage();
-    return;
+    editMessage()
+    return
   }
 
   if (!chatInfo.value.messages.length) {
-    ChatController.createChat({ ...chatInfo.value, id: props.chat.id });
+    ChatController.createChat({ ...chatInfo.value, id: props.chat.id })
   }
 
   const messageBody = {
@@ -75,10 +52,10 @@ function sendMessage() {
     },
     text: messageInput.value,
     created: new Date(),
-  };
+  }
 
-  ChatController.createMessage(messageBody, props.chat.id);
-  chatInfo.value.messages.push(messageBody);
+  ChatController.createMessage(messageBody, props.chat.id)
+  chatInfo.value.messages.push(messageBody)
 
   const updatedDialogItem = {
     text: messageInput.value,
@@ -87,42 +64,82 @@ function sendMessage() {
       name: authStore.authUser.name,
       surname: authStore.authUser.surname,
     },
-  };
+  }
 
-  emit('updateLastMessage', props.chat.id, updatedDialogItem);
-  messageInput.value = '';
+  emit('updateLastMessage', props.chat.id, updatedDialogItem)
+  messageInput.value = ''
 }
 
 function setEditMode(messageId, messageText) {
-  messageInput.value = messageText;
-  editMessageId.value = messageId;
+  messageInput.value = messageText
+  editMessageId.value = messageId
 }
 
 function deleteMessage(messageId) {
-  const updatedMessages = chatInfo.value.messages.filter((message) => message.id != messageId);
-  const lastMessage = chatInfo.value.messages[chatInfo.value.messages.length - 1];
+  const updatedMessages = chatInfo.value.messages.filter(message => message.id !== messageId)
 
-  if (lastMessage.id == messageId) {
-    const { author, text } = updatedMessages[updatedMessages.length - 1];
-    emit('updateLastMessage', props.chat.id, { author, text });
+  if (!updatedMessages.length) {
+    emit('updateLastMessage', props.chat.id, {})
+  } else {
+    const lastMessage = chatInfo.value.messages[chatInfo.value.messages.length - 1]
+
+    if (lastMessage.id === messageId) {
+      const { author, text } = updatedMessages[updatedMessages.length - 1]
+      emit('updateLastMessage', props.chat.id, { author, text })
+    }
   }
 
-  chatInfo.value.messages = updatedMessages;
+  chatInfo.value.messages = updatedMessages
 }
 
 const getUserName = computed(() => {
   if (props.chat) {
-    return `${props.chat.user.name} ${props.chat.user.surname}`;
+    return `${props.chat.user.name} ${props.chat.user.surname}`
   }
-});
+  return ''
+})
 
 watchEffect(() => {
   if (props.chat) {
-    const chat = JSON.parse(ChatController.getChatMessages(route.query.id, props.chat.id));
-    chatInfo.value = chat;
+    const chat = JSON.parse(ChatController.getChatMessages(+route.query.id, props.chat.id))
+    chatInfo.value = chat
   }
-});
+})
 </script>
+
+<template>
+  <section
+    v-if="authStore.authUser"
+    class="messages"
+  >
+    <div class="title">
+      Диалог с {{ getUserName }}
+    </div>
+    <ul class="message-list">
+      <MessageItem
+        v-for="message in chatInfo.messages"
+        :key="message.id"
+        :message="message"
+        :chat-id="chat.id"
+        @edit-message="setEditMode"
+        @delete-message="deleteMessage"
+      />
+    </ul>
+    <form class="message-form">
+      <CustomInput
+        v-model="messageInput"
+        autofocus
+        placeholder="Введите сообщение..."
+      />
+      <button
+        class="button"
+        @click.prevent="sendMessage"
+      >
+        {{ editMessageId ? 'Редактировать' : 'Отправить' }}
+      </button>
+    </form>
+  </section>
+</template>
 
 <style lang="scss" scoped>
 @import url(../styles/ChatBlock.scss);

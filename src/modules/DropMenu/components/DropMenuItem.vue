@@ -1,20 +1,24 @@
-<template>
-  <li ref="dropItem" :tabindex="isHoverable()" class="drop-menu-item">
-    <slot></slot>
-  </li>
-</template>
-
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const dropItem = ref(null)
 
 function isHoverable() {
-  if(dropItem.value) {
+  if (dropItem.value) {
     return dropItem.value.closest('.hoverable') ? 0 : -1
   }
 }
 </script>
+
+<template>
+  <li
+    ref="dropItem"
+    :tabindex="isHoverable()"
+    class="drop-menu-item"
+  >
+    <slot />
+  </li>
+</template>
 
 <style lang="scss" scoped>
 @import url(../styles/DropMenuItem.scss);

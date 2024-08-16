@@ -1,36 +1,44 @@
-import { UserController } from '../user/userController';
-import { userData } from '../user/userModel';
-import { chatData } from './chatModel';
-import { authUser } from '../auth/authData';
+import { UserController } from '../user/userController'
+import { userData } from '../user/userModel'
+import { authUser } from '../auth/authData'
+import { chatData } from './chatModel'
 
 export class ChatController {
   static getDialogs() {
-    const dialogs = [];
+    const dialogs = []
 
     chatData.forEach((chat) => {
-      const user = chat.users.find((user) => user.id == authUser.id);
-      const otherUser = chat.users.find((user) => user.id != authUser.id);
+      const user = chat.users.find(user => user.id === authUser.id)
+      const otherUser = chat.users.find(user => user.id !== authUser.id)
 
       if (user) {
-        const lastMessage = chat.messages[chat.messages.length - 1];
+        const lastMessage = chat.messages[chat.messages.length - 1]
+        let editLastMessage
+
+        if (lastMessage) {
+          editLastMessage = {
+            author: { id: lastMessage.author.id, name: lastMessage.author.name },
+            text: lastMessage.text,
+          }
+        } else {
+          editLastMessage = 'Черновик'
+        }
 
         const dialogItem = {
           id: chat.id,
-          lastMessage: {
-            author: { id: lastMessage.author.id, name: lastMessage.author.name },
-            text: lastMessage.text,
-          },
+          lastMessage: editLastMessage,
           user: { id: otherUser.id, name: otherUser.name, surname: otherUser.surname },
-        };
-        dialogs.push(dialogItem);
-      }
-    });
+        }
 
-    return dialogs;
+        dialogs.push(dialogItem)
+      }
+    })
+
+    return dialogs
   }
 
   static createChat(chatBody) {
-    chatData.push(chatBody);
+    chatData.push(chatBody)
   }
 
   static getEmptyDialogItem(userId) {
@@ -44,26 +52,25 @@ export class ChatController {
         surname,
       },
       lastMessage: {},
-    };
+    }
 
-    return newDialogItem;
+    return newDialogItem
   }
 
   static getChatMessages(userId, chatId) {
-    const chat = chatData.find((chat) => chat.id == chatId);
+    const chat = chatData.find(chat => chat.id === chatId)
 
     if (chat) {
-      return JSON.stringify(chat);
+      return JSON.stringify(chat)
     } else {
-      // попробовать удалить/заменить
-      const users = userData.filter((user) => user.id == userId || user.id == authUser.id);
-      return JSON.stringify({ id: Date.now(), messages: [], users });
+      const users = userData.filter(user => user.id === userId || user.id === authUser.id)
+      return JSON.stringify({ id: Date.now(), messages: [], users })
     }
   }
 
   static createMessage(messageBody, chatId) {
-    const chat = chatData.find((chat) => chat.id == chatId);
-    chat.messages = [...chat.messages, messageBody];
+    const chat = chatData.find(chat => chat.id === chatId)
+    chat.messages = [...chat.messages, messageBody]
   }
 
   static removeMessage(messageId, chatId) {
@@ -81,7 +88,7 @@ export class ChatController {
   }
 
   static editMessageText(chatId, messageId, messageText) {
-    const chat = chatData.find((chat) => chat.id == chatId);
-    chat.messages.find((message) => message.id == messageId).text = messageText;
+    const chat = chatData.find(chat => chat.id === chatId)
+    chat.messages.find(message => message.id === messageId).text = messageText
   }
 }

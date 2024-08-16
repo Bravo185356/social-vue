@@ -1,26 +1,26 @@
 export function handleUserQueryParams(user, query) {
-  const queryEntries = Object.entries(query);
-  let proccessedQueryCount = 0;
+  const queryEntries = Object.entries(query)
+  let proccessedQueryCount = 0
 
   for (const [queryKey, queryValue] of queryEntries) {
-    const userValue = user[queryKey];
+    const userValue = user[queryKey]
 
     switch (queryKey) {
-      case 'name' && !query['surname']:
-        if (userValue === queryValue || user['surname'] === queryValue) {
-          proccessedQueryCount++;
+      case 'name' && !query.surname:
+        if (userValue === queryValue || user.surname === queryValue) {
+          proccessedQueryCount++
         }
 
-        break;
+        break
       case 'onlyOnline':
         if (!queryValue || (queryValue && user.status === 'online')) {
-          proccessedQueryCount++;
+          proccessedQueryCount++
         }
 
-        break;
+        break
       default:
         if (userValue === queryValue) {
-          proccessedQueryCount++;
+          proccessedQueryCount++
         }
     }
   }
@@ -32,6 +32,6 @@ export function handleUserQueryParams(user, query) {
       surname: user.surname,
       city: user.city,
       status: user.status,
-    };
+    }
   }
 }

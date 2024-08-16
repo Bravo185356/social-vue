@@ -12,7 +12,7 @@ const chatData = [
         text: '1111111111111111111111 1111111111111111111111111',
         created: new Date(),
       },
-    ]
+    ],
   },
   {
     id: 2,
@@ -26,6 +26,6 @@ const chatData = [
       { id: 5, author: { id: 1, name: 'Имя', surname: 'Фамилия' }, text: 'Я юзер 1', created: new Date() },
     ],
   },
-];
+]
 
-export { chatData };
+export { chatData }

@@ -87,6 +87,6 @@ const userData = [
     unreadDialog: [],
     settings: { allowOtherUsersCreatePost: false },
   },
-];
+]
 
-export { userData };
+export { userData }
