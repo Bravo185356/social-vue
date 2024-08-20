@@ -12,6 +12,7 @@ const wrapperItem = ref('')
 function removeListeners() {
   window.removeEventListener('mousedown', checkEventTarget)
   window.removeEventListener('keypress', checkEventTarget)
+  document.addEventListener('focusin', checkTabFocusTarget)
 }
 
 function checkEventTarget(e) {
@@ -25,10 +26,17 @@ function checkEventTarget(e) {
   }
 }
 
+function checkTabFocusTarget(e) {
+  if (e.target.closest('.drop-wrapper') !== wrapperItem.value) {
+    menuActive.value = false
+  }
+}
+
 watchEffect(() => {
   if (menuActive.value) {
     window.addEventListener('mousedown', checkEventTarget)
     window.addEventListener('keypress', checkEventTarget)
+    document.addEventListener('focusin', checkTabFocusTarget)
   }
 })
 </script>
