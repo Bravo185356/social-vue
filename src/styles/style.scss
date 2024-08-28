@@ -51,35 +51,6 @@
             transform: translateX(-50%);
         }
     }
-
-}
-
-.button {
-    background-color: $button-background;
-    border-radius: 5px;
-    padding: 5px 15px;
-    color: white;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-        background-color: $button-background-hover;
-    }
-
-    &_plain {
-        background-color: inherit;
-
-        &:hover,
-        &:focus {
-            background-color: $button-background-hover;
-        }
-
-        &.active {
-            color: white;
-            background-color: $button-background;
-        }
-    }
 }
 
 .form {
@@ -91,23 +62,6 @@
 .input-error {
     color: rgb(255, 43, 43);
     font-size: 14px;
-}
-
-.icon-wrapper {
-    display: flex;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.icon-wrapper {
-    color: rgb(212, 212, 212);
-
-    &:hover,
-    &:focus {
-        background-color: $hover-background;
-    }
 }
 
 .avatar {

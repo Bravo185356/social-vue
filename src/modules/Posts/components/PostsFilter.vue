@@ -1,4 +1,6 @@
 <script setup>
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+
 defineProps({
   filterType: String,
 })
@@ -8,20 +10,20 @@ defineEmits(['updateFilter'])
 
 <template>
   <div class="post-filter block">
-    <button
-      class="button button_plain"
+    <CustomButton
+      type="plain"
       :class="{ active: filterType === 'all' }"
       @click="$emit('updateFilter', 'all')"
     >
       Все записи
-    </button>
-    <button
-      class="button button_plain"
+    </CustomButton>
+    <CustomButton
+      type="plain"
       :class="{ active: filterType === 'userOnly' }"
       @click="$emit('updateFilter', 'userOnly')"
     >
       Записи пользователя
-    </button>
+    </CustomButton>
   </div>
 </template>
 

@@ -9,6 +9,7 @@ import { useUnreadDialogs } from '@/stores/unreadDialogs'
 import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import { RequestsController } from '@/data/requests/requestsController'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const requests = ref([])
 
@@ -63,40 +64,46 @@ watchEffect(() => {
 <template>
   <header class="header block">
     <div class="header-container">
-      <RouterLink
+      <CustomButton
         to="/"
-        class="logo icon-wrapper"
+        type="plain"
+        class="logo"
       >
         Social
-      </RouterLink>
+      </CustomButton>
       <nav
         v-if="authStore.authUser"
         class="navigation"
       >
-        <RouterLink
+        <CustomButton
           to="/search"
-          class="search icon-wrapper"
+          type="icon"
+          class="search"
         >
           <v-icon
             class="icon"
             icon="mdi mdi-account-search"
           />
-        </RouterLink>
-        <RouterLink
+        </CustomButton>
+        <CustomButton
           to="/messages"
-          class="chat icon-wrapper"
+          type="icon"
+          class="chat"
         >
           <v-icon
             class="icon"
             icon="mdi-message"
           />
           <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
-        </RouterLink>
+        </CustomButton>
         <DropMenu :text-wrap="true">
           <template #activator>
-            <button class="requests icon-wrapper">
+            <CustomButton
+              class="requests"
+              type="icon"
+            >
               <v-icon icon="mdi-bell" />
-            </button>
+            </CustomButton>
           </template>
           <template #content>
             <template v-if="requests.length">
@@ -114,18 +121,12 @@ watchEffect(() => {
                   <span> хочет добавить вас в друзья</span>
                 </div>
                 <div class="requests-controls">
-                  <button
-                    class="button"
-                    @click="acceptRequest(request.requestCreator.id, request.id)"
-                  >
+                  <CustomButton @click="acceptRequest(request.requestCreator.id, request.id)">
                     Принять
-                  </button>
-                  <button
-                    class="button"
-                    @click="rejectRequest(request.id)"
-                  >
+                  </CustomButton>
+                  <CustomButton @click="rejectRequest(request.id)">
                     Отклонить
-                  </button>
+                  </CustomButton>
                 </div>
               </DropMenuItem>
             </template>
@@ -139,9 +140,12 @@ watchEffect(() => {
         </DropMenu>
         <DropMenu :hover="true">
           <template #activator>
-            <button class="avatar icon-wrapper">
+            <CustomButton
+              class="avatar"
+              type="icon"
+            >
               <img src="../../assets/default-user-image.png">
-            </button>
+            </CustomButton>
           </template>
           <template #content>
             <DropMenuItem @click="settingDialogActive = true">

@@ -6,6 +6,7 @@ import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import DropMenu from '@/modules/DropMenu/components/DropMenu.vue'
 import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   chats: Array,
@@ -43,15 +44,16 @@ function selectDialogWithFriend(id) {
         :hover="true"
       >
         <template #activator>
-          <button
-            class="new-dialog icon-wrapper"
+          <CustomButton
+            class="new-dialog"
+            type="icon"
             @click="showFriendList"
           >
             <v-icon
               class="icon"
               icon="mdi mdi-plus"
             />
-          </button>
+          </CustomButton>
         </template>
         <template #content>
           <div class="users">

@@ -5,6 +5,7 @@ import MessageItem from './MessageItem.vue'
 import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 import { ChatController } from '@/data/chat/chatController'
 import { useAuthStore } from '@/stores/auth'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   chat: Object,
@@ -131,12 +132,12 @@ watchEffect(() => {
         autofocus
         placeholder="Введите сообщение..."
       />
-      <button
+      <CustomButton
         class="button"
         @click.prevent="sendMessage"
       >
         {{ editMessageId ? 'Редактировать' : 'Отправить' }}
-      </button>
+      </CustomButton>
     </form>
   </section>
 </template>

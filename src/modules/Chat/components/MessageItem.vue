@@ -2,6 +2,7 @@
 import { ChatController } from '@/data/chat/chatController'
 import { useAuthStore } from '@/stores/auth'
 import { formatDate } from '@/helpers/formatDate'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   message: Object,
@@ -52,18 +53,18 @@ function deleteMessage() {
         v-if="message.author.id === authStore.authUser.id"
         class="controls"
       >
-        <button
-          class="icon-wrapper"
+        <CustomButton
+          type="icon"
           @click="editMessage"
         >
           <v-icon icon="mdi mdi-pencil" />
-        </button>
-        <button
-          class="icon-wrapper"
+        </CustomButton>
+        <CustomButton
+          type="icon"
           @click="deleteMessage"
         >
           <v-icon icon="mdi mdi-delete" />
-        </button>
+        </CustomButton>
       </div>
     </div>
   </li>

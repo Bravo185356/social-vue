@@ -4,6 +4,7 @@ import CommentItem from './CommentItem.vue'
 import CustomInput from '@/UI/CustomInput/CustomInput.vue'
 import { CommentController } from '@/data/comments/commentController'
 import { useAuthStore } from '@/stores/auth'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   postId: Number,
@@ -59,12 +60,9 @@ watchEffect(() => {
       v-model="commentInput"
       placeholder="Написать комментарий"
     />
-    <button
-      class="button"
-      @click.prevent="createComment"
-    >
+    <CustomButton @click.prevent="createComment">
       Отправить
-    </button>
+    </CustomButton>
   </form>
 </template>
 

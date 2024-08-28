@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import CustomInput from '@/UI/CustomInput/CustomInput.vue'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const emit = defineEmits(['acceptFilter', 'resetFilter'])
 
@@ -65,34 +66,30 @@ function applyFilter() {
         placeholder="Город"
       />
       <div class="filter-online">
-        <button
+        <CustomButton
+          type="plain"
           :class="{ active: !filterParams.onlyOnline }"
-          class="button button_plain"
           @click.prevent="filterParams.onlyOnline = false"
         >
           Все
-        </button>
-        <button
-          class="button button_plain"
+        </CustomButton>
+        <CustomButton
+          type="plain"
           :class="{ active: filterParams.onlyOnline }"
           @click.prevent="filterParams.onlyOnline = true"
         >
           Онлайн
-        </button>
+        </CustomButton>
       </div>
-      <button
-        class="button"
-        @click.prevent="applyFilter"
-      >
+      <CustomButton @click.prevent="applyFilter">
         Поиск
-      </button>
-      <button
+      </CustomButton>
+      <CustomButton
         v-if="isFiltered"
-        class="button"
         @click="resetFilter"
       >
         Сбросить
-      </button>
+      </CustomButton>
     </form>
   </aside>
 </template>

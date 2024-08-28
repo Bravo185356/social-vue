@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import CommentList from './CommentList.vue'
 import { useAuthStore } from '@/stores/auth'
 import { formatDate } from '@/helpers/formatDate'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   post: Object,
@@ -40,19 +41,18 @@ function deletePost() {
           {{ formatDate(post.created) }}
         </div>
       </div>
-      <button
+      <CustomButton
         v-if="+route.params.id === authStore.authUser.id"
-        class="delete icon-wrapper"
+        type="icon"
         @click="deletePost"
       >
-        <span><v-icon icon="mdi mdi-delete" /></span>
-      </button>
+        <v-icon icon="mdi mdi-delete" />
+      </CustomButton>
     </div>
     <div
       class="text"
       v-html="post.text"
     />
-    <div class="controls" />
     <CommentList :post-id="post.id" />
   </article>
 </template>

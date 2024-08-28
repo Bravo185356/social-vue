@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 import { PostController } from '@/data/posts/postController'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 const props = defineProps({
   user: Object,
@@ -55,12 +56,9 @@ const showCreatePostForm = computed(() => {
       clearable
       label="Создать пост"
     />
-    <button
-      class="button"
-      @click.prevent="createPost"
-    >
+    <CustomButton @click.prevent="createPost">
       Создать
-    </button>
+    </CustomButton>
   </form>
 </template>
 

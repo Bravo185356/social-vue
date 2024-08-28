@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import { CommentController } from '@/data/comments/commentController'
 import { useAuthStore } from '@/stores/auth'
+import CustomButton from '@/UI/CustomButton/CustomButton.vue'
 
 defineProps({
   comment: Object,
@@ -38,13 +39,13 @@ function deleteComment(id) {
       <div>{{ comment.text }}</div>
     </div>
     <div class="controls">
-      <button
+      <CustomButton
         v-if="+route.params.id === authStore.authUser.id || comment.author.id === authStore.authUser.id"
-        class="icon-wrapper"
+        type="icon"
         @click="deleteComment(comment.id)"
       >
-        <span><v-icon icon="mdi mdi-delete" /></span>
-      </button>
+        <v-icon icon="mdi mdi-delete" />
+      </CustomButton>
     </div>
   </div>
 </template>
