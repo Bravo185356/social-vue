@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import { watchEffect } from 'vue'
-import AppHeader from './components/AppHeader/AppHeader.vue'
+import AppHeader from './components/AppHeader.vue'
 import { UserController } from './data/user/userController'
 import { useUnreadDialogs } from './stores/unreadDialogs'
 import { useAuthStore } from './stores/auth'

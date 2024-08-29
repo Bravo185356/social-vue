@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import CustomInput from '@/UI/CustomInput/CustomInput.vue'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomInput from '@/UI/CustomInput.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const emit = defineEmits(['acceptFilter', 'resetFilter'])
 
@@ -95,5 +95,16 @@ function applyFilter() {
 </template>
 
 <style lang="scss" scoped>
-@import url(./FilterBlock.scss);
+.filter {
+  flex: 0 1 300px;
+
+  &-online {
+    display: flex;
+    gap: 10px;
+  }
+
+  &-form {
+    padding: 30px 20px;
+  }
+}
 </style>

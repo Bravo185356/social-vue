@@ -2,10 +2,10 @@
 import { computed, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import MessageItem from './MessageItem.vue'
-import CustomInput from '@/UI/CustomInput/CustomInput.vue'
+import CustomInput from '@/UI/CustomInput.vue'
 import { ChatController } from '@/data/chat/chatController'
 import { useAuthStore } from '@/stores/auth'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   chat: Object,
@@ -143,5 +143,37 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/ChatBlock.scss);
+@import '@/styles/_variables.scss';
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.message-list {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.title {
+  font-size: 18px;
+  padding: 15px;
+  border-bottom: 1px solid $border-color;
+}
+
+.message-form {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+
+  .input {
+    border: 1px solid $border-color;
+    border-radius: 5px;
+
+    &:focus {
+      border: 1px solid $button-background-hover;
+    }
+  }
+}
 </style>

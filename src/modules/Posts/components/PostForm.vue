@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 import { PostController } from '@/data/posts/postController'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   user: Object,
@@ -63,5 +63,12 @@ const showCreatePostForm = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/PostForm.scss);
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
 </style>

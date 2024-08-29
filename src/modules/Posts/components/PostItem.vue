@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 import CommentList from './CommentList.vue'
 import { useAuthStore } from '@/stores/auth'
 import { formatDate } from '@/helpers/formatDate'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   post: Object,
@@ -58,5 +58,36 @@ function deletePost() {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/PostItem.scss);
+@import '@/styles/_variables.scss';
+
+.post {
+  padding: 20px;
+}
+
+.text {
+  margin-top: 20px;
+  white-space: pre-wrap;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 20px;
+}
+
+.create-date {
+  font-size: 12px;
+}
+
+.author {
+  flex: 1 1 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+}
 </style>

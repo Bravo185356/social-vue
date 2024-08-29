@@ -1,5 +1,5 @@
 <script setup>
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 defineProps({
   filterType: String,
@@ -28,5 +28,10 @@ defineEmits(['updateFilter'])
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/PostFilter.scss);
+.post-filter {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
 </style>

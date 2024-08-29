@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
-import CustomModal from '@/UI/Modal/CustomModal.vue'
+import CustomModal from '@/UI/CustomModal.vue'
 import DropMenu from '@/modules/DropMenu/components/DropMenu.vue'
 import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue'
 import { UserController } from '@/data/user/userController'
@@ -9,7 +9,7 @@ import { useUnreadDialogs } from '@/stores/unreadDialogs'
 import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import { RequestsController } from '@/data/requests/requestsController'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const requests = ref([])
 
@@ -144,7 +144,7 @@ watchEffect(() => {
               class="avatar"
               type="icon"
             >
-              <img src="../../assets/default-user-image.png">
+              <img src="@/assets/default-user-image.png">
             </CustomButton>
           </template>
           <template #content>
@@ -181,5 +181,60 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(./AppHeader.scss);
+@import '@/styles/_variables.scss';
+
+.header {
+  background-color: $block-background;
+  color: white;
+  border-radius: 0;
+  padding: 0px 15px;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+  gap: 20px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.chat {
+  font-size: 18px;
+}
+
+.search,
+.requests {
+  font-size: 20px;
+}
+
+.requests-empty {
+  text-wrap: nowrap;
+  padding: 10px 15px;
+}
+
+.requests-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.settings__block {
+  display: flex;
+}
 </style>

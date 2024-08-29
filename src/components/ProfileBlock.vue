@@ -36,7 +36,7 @@ function redirectToChat() {
 <template>
   <section class="profile block">
     <div class="avatar">
-      <img src="../../assets/default-user-image.png">
+      <img src="@/assets/default-user-image.png">
     </div>
     <div class="info">
       <div>
@@ -96,5 +96,27 @@ function redirectToChat() {
 </template>
 
 <style lang="scss" scoped>
-@import url(./ProfileBlock.scss);
+@import '@/styles/_variables.scss';
+
+.profile {
+  padding: 20px;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.name {
+  font-size: 20px;
+}
+
+.avatar {
+  width: 260px;
+  height: 260px;
+}
 </style>

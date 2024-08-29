@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import FilterBlock from '@/components/FilterBlock/FilterBlock.vue'
+import FilterBlock from '@/components/FilterBlock.vue'
 import UserList from '@/modules/UserList/components/UserList.vue'
 import { UserController } from '@/data/user/userController'
 
@@ -30,5 +30,9 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(./UsersPage.scss);
+.users {
+  display: flex;
+  align-items: start;
+  gap: 30px;
+}
 </style>

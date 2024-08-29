@@ -82,5 +82,21 @@ async function createUser() {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/RegistrationBlock.scss);
+.registration {
+  width: 50%;
+  margin: 0px auto;
+  padding: 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  flex: 1 1 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
 </style>

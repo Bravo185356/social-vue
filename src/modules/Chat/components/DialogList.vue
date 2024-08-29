@@ -6,7 +6,7 @@ import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import DropMenu from '@/modules/DropMenu/components/DropMenu.vue'
 import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   chats: Array,
@@ -90,5 +90,53 @@ function selectDialogWithFriend(id) {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/DialogList.scss);
+@import '@/styles/_variables.scss';
+
+.dialogs {
+  flex: 0 1 35%;
+  border-right: 1px solid $border-color;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+  padding: 0px 15px;
+}
+
+.friend-add {
+  padding: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.title {
+  font-size: 18px;
+  padding: 15px 15px 15px 0px;
+}
+
+.select-friend {
+  border-bottom: 1px solid $border-color;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+}
 </style>

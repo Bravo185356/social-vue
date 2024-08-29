@@ -1,8 +1,8 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import FriendList from '@/components/FriendList/FriendList.vue'
-import ProfileBlock from '@/components/ProfileBlock/ProfileBlock.vue'
+import FriendList from '@/components/FriendList.vue'
+import ProfileBlock from '@/components/ProfileBlock.vue'
 import PostsBlock from '@/modules/Posts/components/PostsBlock.vue'
 import { UserController } from '@/data/user/userController'
 import { FriendsController } from '@/data/friends/friendsController'
@@ -50,5 +50,27 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(./ProfilePage.scss);
+.bottom-blocks {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.profile-left {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 300px;
+}
+
+.profile-content {
+  display: flex;
+  gap: 20px;
+}
+
+.profile-right {
+  flex: 1 1 auto;
+}
 </style>

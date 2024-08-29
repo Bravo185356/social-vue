@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import FilterBlock from '@/components/FilterBlock/FilterBlock.vue'
+import FilterBlock from '@/components/FilterBlock.vue'
 import UserList from '@/modules/UserList/components/UserList.vue'
 import { FriendsController } from '@/data/friends/friendsController'
 
@@ -33,5 +33,9 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(./FriendsPage.scss);
+.friends {
+  display: flex;
+  align-items: start;
+  gap: 30px;
+}
 </style>

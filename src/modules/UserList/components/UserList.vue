@@ -17,5 +17,10 @@ const props = defineProps({
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/UserList.scss);
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
 </style>

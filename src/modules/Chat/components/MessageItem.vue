@@ -2,7 +2,7 @@
 import { ChatController } from '@/data/chat/chatController'
 import { useAuthStore } from '@/stores/auth'
 import { formatDate } from '@/helpers/formatDate'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   message: Object,
@@ -71,5 +71,50 @@ function deleteMessage() {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/MessageItem.scss);
+.message {
+  padding: 15px;
+
+  &:hover .controls {
+    visibility: visible;
+  }
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.right-side {
+  flex: 1 1 auto;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  visibility: hidden;
+}
 </style>

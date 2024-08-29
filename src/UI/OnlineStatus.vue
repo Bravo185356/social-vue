@@ -12,5 +12,21 @@ const props = defineProps({
 </template>
 
 <style lang="scss" scoped>
-@import url(./OnlineStatus.scss);
+.online-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(-5px, -5px);
+
+  &.online {
+    background-color: rgb(0, 206, 0);
+  }
+
+  &.offline {
+    background-color: gray;
+  }
+}
 </style>

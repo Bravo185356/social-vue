@@ -33,5 +33,9 @@ const filteredPosts = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/PostList.scss);
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 </style>

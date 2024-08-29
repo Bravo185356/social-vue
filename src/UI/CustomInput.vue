@@ -42,5 +42,46 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(./CustomInput.scss);
+@import '@/styles/_variables.scss';
+
+.input-block {
+  width: 100%;
+}
+
+.input-wrapper {
+  position: relative;
+
+  .input {
+    position: relative;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    padding: 5px;
+    width: 100%;
+    color: white;
+
+    &::placeholder {
+      color: rgb(165, 165, 165);
+    }
+
+    &:focus + span {
+      width: 100%;
+      left: 0;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  span {
+    content: '';
+    transition: all 0.2s ease;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: $blue-color;
+    z-index: 10;
+  }
+}
 </style>

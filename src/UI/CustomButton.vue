@@ -48,6 +48,5 @@ const attrs = useAttrs()
   &:focus {
     background-color: $button-background-hover;
   }
-
 }
 </style>

@@ -77,5 +77,24 @@ async function login() {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/LoginPage.scss);
+.login {
+  width: 50%;
+  margin: 0px auto;
+  padding: 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.not-found {
+  text-align: center;
+  color: red;
+}
+
+.create-account {
+  text-align: center;
+}
 </style>

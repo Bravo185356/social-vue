@@ -1,5 +1,5 @@
 <script setup>
-import OnlineStatus from '@/UI/OnlineStatus/OnlineStatus.vue'
+import OnlineStatus from '@/UI/OnlineStatus.vue'
 
 defineProps({
   user: Object,
@@ -30,5 +30,26 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/UserItem.scss);
+@import '@/styles/_variables.scss';
+
+.user-item {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.city {
+  font-size: 14px;
+}
+
+.user-link {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
 </style>

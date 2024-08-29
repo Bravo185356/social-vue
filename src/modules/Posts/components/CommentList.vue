@@ -1,10 +1,10 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import CommentItem from './CommentItem.vue'
-import CustomInput from '@/UI/CustomInput/CustomInput.vue'
+import CustomInput from '@/UI/CustomInput.vue'
 import { CommentController } from '@/data/comments/commentController'
 import { useAuthStore } from '@/stores/auth'
-import CustomButton from '@/UI/CustomButton/CustomButton.vue'
+import CustomButton from '@/UI/CustomButton.vue'
 
 const props = defineProps({
   postId: Number,
@@ -67,5 +67,9 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/CommentList.scss);
+.comment-form {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
 </style>

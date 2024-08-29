@@ -68,5 +68,8 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url(../styles/ChatPage.scss);
+.block {
+  display: flex;
+  min-height: 600px;
+}
 </style>
