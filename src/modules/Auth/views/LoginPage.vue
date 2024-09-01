@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useVuelidate from '@vuelidate/core'
 import { loginRules } from '../utils/validationRules'
@@ -10,7 +10,7 @@ import CustomInput from '@/UI/CustomInput.vue'
 const authStore = useAuthStore()
 const router = useRouter()
 
-const formData = ref({
+const formData = reactive({
   login: 'test11',
   password: 'test11',
 })
@@ -23,7 +23,7 @@ async function login() {
   const isValid = await v$.value.$validate()
 
   if (isValid) {
-    const user = JSON.parse(AuthController.getUser(formData.value.login, formData.value.password))
+    const user = JSON.parse(AuthController.getUser(formData.login, formData.password))
 
     if (!user.error) {
       authStore.setAuthUser(user)

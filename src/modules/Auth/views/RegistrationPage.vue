@@ -1,11 +1,11 @@
 <script setup>
 import useVuelidate from '@vuelidate/core'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 import { registrationRules } from '../utils/validationRules'
 import { AuthController } from '@/data/auth/authData'
 import CustomInput from '@/UI/CustomInput.vue'
 
-const formData = ref({
+const formData = reactive({
   name: '',
   surname: '',
   login: '',
@@ -20,11 +20,11 @@ async function createUser() {
 
   if (isValid) {
     const userBody = {
-      name: formData.value.name,
-      surname: formData.value.surname,
-      login: formData.value.login,
-      password: formData.value.password,
-      city: formData.value.city,
+      name: formData.name,
+      surname: formData.surname,
+      login: formData.login,
+      password: formData.password,
+      city: formData.city,
     }
 
     AuthController.createUser(userBody)
