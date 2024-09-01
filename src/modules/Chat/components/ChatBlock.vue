@@ -10,8 +10,8 @@ import CustomButton from '@/UI/CustomButton.vue'
 const props = defineProps({
   chat: Object,
 })
+const emit = defineEmits(['updateLastMessage'])
 
-const emit = defineEmits(['updateLastMessage', 'addEmptyDialog'])
 const route = useRoute()
 const authStore = useAuthStore()
 
@@ -58,16 +58,15 @@ function sendMessage() {
   ChatController.createMessage(messageBody, props.chat.id)
   chatInfo.value.messages.push(messageBody)
 
-  const updatedDialogItem = {
+  const newLastMessage = {
     text: messageInput.value,
     author: {
       id: authStore.authUser.id,
       name: authStore.authUser.name,
-      surname: authStore.authUser.surname,
     },
   }
 
-  emit('updateLastMessage', props.chat.id, updatedDialogItem)
+  emit('updateLastMessage', props.chat.id, newLastMessage)
   messageInput.value = ''
 }
 

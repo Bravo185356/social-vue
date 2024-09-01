@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router'
 import { watchEffect } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import { UserController } from './data/user/userController'
-import { useUnreadDialogs } from './stores/unreadDialogs'
+import { useUnreadChats } from './stores/unreadChats'
 import { useAuthStore } from './stores/auth'
 import { RequestsController } from './data/requests/requestsController'
 import { useRequestStore } from './stores/requests'
@@ -11,7 +11,7 @@ import { AuthController } from './data/auth/authData'
 
 const authStore = useAuthStore()
 const requestStore = useRequestStore()
-const unreadedDialogsStore = useUnreadDialogs()
+const unreadedChatsStore = useUnreadChats()
 
 watchEffect(() => {
   if (localStorage.getItem('token')) {
@@ -20,8 +20,8 @@ watchEffect(() => {
   }
 
   if (authStore.authUser) {
-    const unreadedDialogs = JSON.parse(UserController.getUnreadedDialogs(authStore.authUser.id))
-    unreadedDialogsStore.setUnreadDialogs(unreadedDialogs)
+    const unreadedChats = JSON.parse(UserController.getUnreadedChats(authStore.authUser.id))
+    unreadedChatsStore.setUnreadChats(unreadedChats)
 
     const myRequests = JSON.parse(RequestsController.getSendedRequests())
     requestStore.setRequests(myRequests)

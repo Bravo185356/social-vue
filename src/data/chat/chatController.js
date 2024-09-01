@@ -4,47 +4,47 @@ import { authUser } from '../auth/authData'
 import { chatData } from './chatModel'
 
 export class ChatController {
-  static getDialogs() {
-    const dialogs = []
+  static getChats() {
+    const chats = []
 
     chatData.forEach((chat) => {
       const user = chat.users.find(user => user.id === authUser.id)
-      const otherUser = chat.users.find(user => user.id !== authUser.id)
 
       if (user) {
+        const otherUser = chat.users.find(user => user.id !== authUser.id)
         const lastMessage = chat.messages[chat.messages.length - 1]
-        let editLastMessage
+        let chatLastMessage
 
         if (lastMessage) {
-          editLastMessage = {
+          chatLastMessage = {
             author: { id: lastMessage.author.id, name: lastMessage.author.name },
             text: lastMessage.text,
           }
         } else {
-          editLastMessage = 'Черновик'
+          chatLastMessage = 'Черновик'
         }
 
-        const dialogItem = {
+        const chatItem = {
           id: chat.id,
-          lastMessage: editLastMessage,
+          lastMessage: chatLastMessage,
           user: { id: otherUser.id, name: otherUser.name, surname: otherUser.surname },
         }
 
-        dialogs.push(dialogItem)
+        chats.push(chatItem)
       }
     })
 
-    return dialogs
+    return chats
   }
 
   static createChat(chatBody) {
     chatData.push(chatBody)
   }
 
-  static getEmptyDialogItem(userId) {
+  static getEmptyChatItem(userId) {
     const { id, name, surname } = JSON.parse(UserController.fetchUser(userId))
 
-    const newDialogItem = {
+    const newChatItem = {
       id: Date.now(),
       user: {
         id,
@@ -54,7 +54,7 @@ export class ChatController {
       lastMessage: {},
     }
 
-    return newDialogItem
+    return newChatItem
   }
 
   static getChatMessages(userId, chatId) {

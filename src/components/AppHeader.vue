@@ -5,7 +5,7 @@ import CustomModal from '@/UI/CustomModal.vue'
 import DropMenu from '@/modules/DropMenu/components/DropMenu.vue'
 import DropMenuItem from '@/modules/DropMenu/components/DropMenuItem.vue'
 import { UserController } from '@/data/user/userController'
-import { useUnreadDialogs } from '@/stores/unreadDialogs'
+import { useUnreadChats } from '@/stores/unreadChats'
 import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import { RequestsController } from '@/data/requests/requestsController'
@@ -14,10 +14,10 @@ import CustomButton from '@/UI/CustomButton.vue'
 const requests = ref([])
 
 const authStore = useAuthStore()
-const unreadDialogsStore = useUnreadDialogs()
+const unreadChatsStore = useUnreadChats()
 const router = useRouter()
 const allowOtherUsersCreatePost = ref(false)
-const settingDialogActive = ref(false)
+const settingChatActive = ref(false)
 
 function acceptRequest(userId, requestId) {
   FriendsController.addFriend(userId)
@@ -31,7 +31,7 @@ function rejectRequest(requestId) {
 
 function logout() {
   authStore.$reset()
-  unreadDialogsStore.$reset()
+  unreadChatsStore.$reset()
 
   router.push({ path: '/login' })
   localStorage.removeItem('token')
@@ -44,7 +44,7 @@ function changeSettings() {
 
   authStore.updateAuthUser('settings', newSettings)
   UserController.updateSettings(newSettings)
-  settingDialogActive.value = false
+  settingChatActive.value = false
 }
 
 const isSaveButtonShow = computed(() => {
@@ -94,7 +94,7 @@ watchEffect(() => {
             class="icon"
             icon="mdi-message"
           />
-          <span v-if="unreadDialogsStore.unreadDialogs.length">{{ unreadDialogsStore.unreadDialogs.length }}</span>
+          <span v-if="unreadChatsStore.unreadChats.length">{{ unreadChatsStore.unreadChats.length }}</span>
         </CustomButton>
         <DropMenu :text-wrap="true">
           <template #activator>
@@ -148,10 +148,10 @@ watchEffect(() => {
             </CustomButton>
           </template>
           <template #content>
-            <DropMenuItem @click="settingDialogActive = true">
+            <DropMenuItem @click="settingChatActive = true">
               <div>Настройки</div>
             </DropMenuItem>
-            <CustomModal v-model="settingDialogActive">
+            <CustomModal v-model="settingChatActive">
               <template #title>
                 Настройки
               </template>

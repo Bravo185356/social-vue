@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import DialogItem from './DialogItem.vue'
+import ChatItem from './ChatItem.vue'
 import { FriendsController } from '@/data/friends/friendsController'
 import { useAuthStore } from '@/stores/auth'
 import DropMenu from '@/modules/DropMenu/components/DropMenu.vue'
@@ -19,33 +19,31 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const friends = ref([])
-const newDialogModalActive = ref(false)
-const showNewDialogDropMenu = ref(false)
+const newChatModalActive = ref(false)
+const showNewChatDropMenu = ref(false)
 
 function showFriendList() {
-  newDialogModalActive.value = true
+  newChatModalActive.value = true
   friends.value = JSON.parse(FriendsController.getFriends(authStore.authUser.id))
 }
 
-function selectDialogWithFriend(id) {
+function selectChatWithFriend(id) {
   router.push({ path: '/messages', query: { id } })
-  modalActive.value = false
 }
 </script>
 
 <template>
-  <section class="dialogs">
+  <section class="chats">
     <div class="header">
       <div class="title">
         Мои диалоги
       </div>
       <DropMenu
-        v-model="showNewDialogDropMenu"
+        v-model="showNewChatDropMenu"
         :hover="true"
       >
         <template #activator>
           <CustomButton
-            class="new-dialog"
             type="icon"
             @click="showFriendList"
           >
@@ -61,7 +59,7 @@ function selectDialogWithFriend(id) {
               v-for="friend in friends"
               :key="friend.id"
               class="user"
-              @click="selectDialogWithFriend(friend.id)"
+              @click="selectChatWithFriend(friend.id)"
             >
               <div class="avatar">
                 <img src="@/assets/default-user-image.png">
@@ -74,14 +72,11 @@ function selectDialogWithFriend(id) {
         </template>
       </DropMenu>
     </div>
-    <div
-      v-if="chats.length"
-      class="dialog-list"
-    >
-      <DialogItem
-        v-for="chat in props.chats"
-        :key="chat.id"
-        :chat="chat"
+    <div v-if="chats.length">
+      <ChatItem
+        v-for="chatItem in props.chats"
+        :key="chatItem.id"
+        :chat-item="chatItem"
         :select-chat-id="selectChatId"
         @select-chat="(chatId) => $emit('selectChat', chatId)"
       />
@@ -92,7 +87,7 @@ function selectDialogWithFriend(id) {
 <style lang="scss" scoped>
 @import '@/styles/_variables.scss';
 
-.dialogs {
+.chats {
   flex: 0 1 35%;
   border-right: 1px solid $border-color;
 }

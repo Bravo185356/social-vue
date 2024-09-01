@@ -50,7 +50,7 @@ export class UserController {
     return JSON.stringify(filteredUsers)
   }
 
-  static getUnreadedDialogs(userId) {
+  static getUnreadedChats(userId) {
     return JSON.stringify(userData.find(user => user.id === userId).unreadDialog)
   }
 }

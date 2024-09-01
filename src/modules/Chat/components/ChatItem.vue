@@ -1,10 +1,10 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
-import { useUnreadDialogs } from '@/stores/unreadDialogs'
+import { useUnreadChats } from '@/stores/unreadChats'
 
 const props = defineProps({
-  chat: Object,
+  chatItem: Object,
   selectChatId: Number,
 })
 
@@ -12,31 +12,31 @@ const emit = defineEmits(['selectChat'])
 
 const route = useRoute()
 const router = useRouter()
-const store = useUnreadDialogs()
+const store = useUnreadChats()
 
-const dialogIsUnread = computed(() => {
-  const unreadDialog = store.unreadDialogs.find(unreadDialog => unreadDialog.id === props.chat.id)
+const chatIsUnread = computed(() => {
+  const unreadChat = store.unreadChats.find(chat => chat.id === props.chatItem.id)
 
-  if (unreadDialog && unreadDialog.id === props.selectChatId) {
-    store.removeUnreadDialog(props.chat.id)
+  if (unreadChat && unreadChat.id === props.selectChatId) {
+    store.removeUnreadChat(props.chatItem.id)
     return
   }
 
-  return unreadDialog ? unreadDialog.numOfUnreadMessages : false
+  return unreadChat ? unreadChat.numOfUnreadMessages : false
 })
 
 function selectChat() {
-  if (dialogIsUnread.value) {
-    store.removeUnreadDialog(props.chat.id)
+  if (chatIsUnread.value) {
+    store.removeUnreadChat(props.chatItem.id)
   }
 
-  emit('selectChat', props.chat.id)
-  router.push({ path: `/messages`, query: { id: props.chat.user.id } })
+  emit('selectChat', props.chatItem.id)
+  router.push({ path: `/messages`, query: { id: props.chatItem.user.id } })
 }
 // Если есть lastMessage, то возвращаем автора и текст
 const lastMessage = computed(() => {
-  if (props.chat.lastMessage.author) {
-    return `${props.chat.lastMessage.author.name}: ${props.chat.lastMessage.text}`
+  if (props.chatItem.lastMessage.author) {
+    return `${props.chatItem.lastMessage.author.name}: ${props.chatItem.lastMessage.text}`
   } else {
     return 'Черновик'
   }
@@ -46,24 +46,24 @@ const lastMessage = computed(() => {
 <template>
   <div
     tabindex="0"
-    class="dialog"
-    :class="{ selected: chat.user.id === +route.query.id }"
+    class="chat-item"
+    :class="{ selected: chatItem.user.id === +route.query.id }"
     @click="selectChat"
   >
     <div class="avatar">
       <img src="@/assets/default-user-image.png">
     </div>
     <div class="info">
-      <div>{{ chat.user.name }} {{ chat.user.surname }}</div>
+      <div>{{ chatItem.user.name }} {{ chatItem.user.surname }}</div>
       <div class="last-message">
         {{ lastMessage }}
       </div>
     </div>
     <div
-      v-if="dialogIsUnread"
+      v-if="chatIsUnread"
       class="unread"
     >
-      {{ dialogIsUnread }}
+      {{ chatIsUnread }}
     </div>
   </div>
 </template>
@@ -71,7 +71,7 @@ const lastMessage = computed(() => {
 <style lang="scss" scoped>
 @import '@/styles/_variables.scss';
 
-.dialog {
+.chat-item {
   display: flex;
   align-items: center;
   gap: 10px;
