@@ -70,12 +70,14 @@ export class ChatController {
 
   static createMessage(messageBody, chatId) {
     const chat = chatData.find(chat => chat.id === chatId)
-    chat.messages = [...chat.messages, messageBody]
+    chat.messages.push(messageBody)
   }
 
   static removeMessage(messageId, chatId) {
     const chat = chatData.find(chat => chat.id === chatId)
-    chat.messages = chat.messages.filter(message => message.id !== messageId)
+
+    const messageIndex = chat.messages.findIndex(msg => msg.id === messageId)
+    chat.messages.splice(messageIndex, 1)
 
     if (!chat.messages.length) {
       this.deleteChatItem(chat.id)
